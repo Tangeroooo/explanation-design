@@ -1,17 +1,17 @@
-# 설명 순서
+# Order the explanation
 
-문서의 각 부분에 `독자 질문 → 핵심 답 → 근거 → 다음 질문`이 있어야 한다. 섹션 수는 고정하지 않는다.
+Each part should connect `reader question → main answer → evidence → next question`. Do not fix the number of sections.
 
-추천 기본 순서: 직접 답 → 꼭 필요한 개념 → 입력 하나의 흐름 → 실패·선택이 바뀌는 조건 → 판단·행동. 독자가 원인 조사를 요청하면 관측된 증상과 그 조건에서 시작한다.
+A useful default is direct answer → essential concepts → one input's path → failures or conditions that change the choice → judgment and action. For a cause investigation, start with the observed symptom and its conditions.
 
-예: “왜 ack 실패 후 중복이 생기는가?”
+Example: “Why can an ack failure cause duplicates?”
 
-1. 답: 전송 성공과 ack 성공이 하나의 atomic operation이 아니기 때문이다.
-2. 필요한 개념: ack는 처리 완료를 broker에 알리는 별도 호출이다.
-3. 흐름: send 성공 → ack 실패 → broker 상태 미확정 → 조건부 재배달.
-4. 한계: broker 정책과 sink idempotency는 별도로 확인해야 한다.
-5. 대처: 관측·재시도 범위 확인 후 중복 허용 또는 deduplication 결정.
+1. Answer: successful transmission and successful ack are not one atomic operation.
+2. Essential concept: ack is a separate call that reports completion to the broker.
+3. Flow: send succeeds → ack fails → broker state remains uncertain → redelivery is conditional on its policy.
+4. Limit: broker policy and sink idempotency need separate verification.
+5. Action: check observations and retry scope before choosing duplicate tolerance or deduplication.
 
-모듈 목록을 이 순서의 대체물로 쓰지 않는다. 그림이 있으면 본문에서 먼저 읽을 이유를 주고, 그림 뒤에서 결론과 생략 범위를 설명한다. 캡션에 중요한 조건을 모두 숨기지 않는다.
+A module inventory cannot replace this explanation. Introduce why a figure matters before showing it, then explain its conclusion and omissions afterward. Do not hide all important conditions in a caption.
 
-초안을 줄일 때 먼저 반복과 배경을 줄인다. 결론을 바꿀 오류·제약·불확실성은 남긴다. 각 문단이 새 질문에 답하지 않으면 합치거나 삭제한다.
+When shortening a draft, remove repetition and background first. Preserve errors, constraints, and uncertainty that could change the conclusion. Merge or delete paragraphs that answer no new question.

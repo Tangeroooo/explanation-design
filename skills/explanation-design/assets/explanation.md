@@ -1,29 +1,29 @@
-# 설명 제목
+# Explanation title
 
-<!-- 필요한 부분만 사용한다. 이 틀의 모든 섹션을 강제하지 않는다. -->
+<!-- Use only the parts needed. Do not require every section in this template. Adapt the language to the reader. -->
 
-핵심 답변과 성립 조건.
+Direct answer and the conditions under which it holds.
 
-## 왜 이 설명이 필요한가
+## Why this explanation matters
 
-독자의 질문·판단 목적·설명 범위·읽은 버전.
+The reader's question, decision purpose, scope, and inspected version.
 
-## 실제로 어떻게 동작하는가
+## How it actually works
 
-구체적 입력·처리·상태 변화·결과. 중요한 주장 옆에 출처.
+A concrete input, processing, state changes, and outcome. Put evidence next to important claims.
 
-## 조건과 다른 선택
+## Conditions and alternatives
 
-중요한 실패 경로·제약·반례 또는 동일 기준의 대안 비교.
+Important failures, constraints, counterexamples, or alternatives compared on shared criteria.
 
-## 판단과 다음 행동
+## Judgment and next actions
 
-현재 조건에서의 결론·선택이 달라지는 조건·실행 가능한 대처.
+The conclusion under current conditions, what would change the choice, and actionable responses.
 
-## 근거와 한계
+## Evidence and limits
 
-재확인할 코드·문서·데이터의 위치와 버전. 사실·추론·제안·미확인 구분.
+Traceable code, document, and data locations and versions. Separate facts, inferences, proposals, and unknowns.
 
-## 검증 기록
+## Verification record
 
-구조 / 근거·의미 / 실제로 본 시각 결과 / 수정 / 미검증 범위.
+Structural checks / evidence and meaning / visual results actually viewed / corrections / unverified areas.

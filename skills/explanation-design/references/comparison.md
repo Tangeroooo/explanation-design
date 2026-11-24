@@ -1,14 +1,14 @@
-# 비교와 조건부 선택
+# Compare and make conditional choices
 
-비교 전에 scope를 맞춘다: 버전·workload·비용 단위·보장·측정 환경. 한쪽은 vendor 주장, 다른 쪽은 측정값이면 근거 수준의 차이를 표시한다.
+Align scope before comparing: versions, workloads, cost units, guarantees, and measurement environments. If one side is a vendor claim and the other measured evidence, disclose the different evidence levels.
 
-평가 축은 독자가 결정할 항목으로 제한한다. `속성 → 실제 영향 → 선택 조건`을 연결한다. “분산”이라는 속성만으로 우수하다고 결론내리지 않는다.
+Limit criteria to what the reader needs to decide. Connect `attribute → practical effect → choice condition`. The attribute “distributed” alone does not establish superiority.
 
-| 평가 축 | A | B | 판단에 미치는 영향 |
+| Criterion | A | B | Effect on the decision |
 |---|---|---|---|
-| 응답 후 실패 시 보존 | 근거 있는 보장 | 미확인 | 유실 허용 여부에 따라 추가 검증 필요 |
-| 운영 부담 | 구성·복구 절차 근거 | 구성·복구 절차 근거 | 담당 인력·장애 대응 시간에 따라 선택 |
+| Preservation after a response and failure | Supported guarantee | Unknown | Further verification depends on loss tolerance |
+| Operational burden | Evidence about setup and recovery | Evidence about setup and recovery | Choice depends on staffing and response time |
 
-미확인은 0점이 아니다. 없는 값을 임의로 채우거나 근거 없이 별점·총점을 만들지 않는다. weighted score를 사용자가 요청했다면 가중치·정규화·불확실성을 공개한다.
+Unknown is not a zero score. Do not fill missing values or invent ratings and totals without evidence. If the user requests a weighted score, disclose weights, normalization, and uncertainty.
 
-최종 선택은 `현재 조건에서는 A / 조건 X가 바뀌면 B / 아직 Y를 확인해야 함`으로 표현한다. 비교 대상마다 중요한 실패 조건을 포함하며 동일한 범위로 평가한다.
+Express the conclusion as `A under current conditions / B if condition X changes / Y still needs verification`. Include important failure conditions for each alternative and compare the same scope.

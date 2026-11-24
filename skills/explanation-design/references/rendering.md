@@ -1,35 +1,36 @@
-# 제작 연계와 문서 조립
+# Production integration and document assembly
 
-## diagram-design 호출 경계
+## Boundary with diagram-design
 
-1. 현재 session의 skill catalog에서 `diagram-design` 위치를 찾는다. 경로가 사라졌으면 알려진 skill/plugin roots에서 `rg --files --hidden … -g SKILL.md`로 발견한다. 버전·홈 디렉터리를 스킬에 고정하지 않는다. 여러 설치가 있으면 활성 catalog와 일치하는 것을 우선하고 모호함을 기록한다.
-2. 실제 `SKILL.md`, 선택한 type reference, 필요한 style·export·검증 지침을 읽는다. 스타일·크기·출력 선택에 이미 있는 사용자 결정을 전달한다. 제작 도구의 지침을 기억으로 대체하지 않는다.
-3. [그림 명세](../assets/figure-brief.md)를 전달한다. 질문·메시지·대상·출처·claim·node/edge·상태·정확한 라벨·생략·size·style·format·수용 기준을 포함한다. 사실/추론/제안/미확인의 시각 표현은 명세에서 합의한다.
-4. 해당 환경에서 skill을 적용해 제작하고 제작본과 검증 결과를 회수한다. skill은 agent 지침일 수 있으며 별도 rendering API가 있다고 가정하지 않는다. 실제 제작·검증·export가 없으면 “연계 완료”라고 쓰지 않는다.
-5. 결과를 의미적으로 대조한다. 특히 화살표 방향·guard·수치·순서·실패 후 상태를 확인한다. 누락이 해석을 바꾸면 그림 또는 명세를 수정하고 다시 검증한다.
-6. SVG/PNG가 요청되면 설치된 skill의 export helper를 사용한다. 파일 이름·출력 형식·미검증 범위를 보고한다.
+1. Find `diagram-design` in the current session's skill catalog. If its path no longer exists, discover it under known skill/plugin roots with `rg --files --hidden … -g SKILL.md`. Do not hardcode versions or home directories in the skill. With multiple installations, prefer the active catalog match and record ambiguity.
+2. Read its actual `SKILL.md`, chosen type reference, and needed style, export, and verification instructions. Carry forward the user's existing style, size, and output decisions. Do not substitute remembered guidance.
+3. Pass the [figure brief](../assets/figure-brief.md): question, message, audience, sources, claims, nodes/edges, states, exact labels, omissions, size, style, format, and acceptance criteria. Specify visual treatment of facts, inferences, proposals, and unknowns.
+4. Apply the skill in the available environment and collect the produced assets and verification results. A skill may be agent instructions rather than a rendering API. Do not claim integration was verified without actual production, checking, and export.
+5. Compare meaning: especially arrow direction, guards, numbers, order, and state after failure. If an omission changes interpretation, fix the figure or brief and verify again.
+6. For requested SVG/PNG files, use the installed skill's export helpers. Report filenames, formats, and unverified areas.
 
-diagram-design이 없거나 도구가 작동하지 않으면 가능한 설명·표·명세를 완료한다. 요청한 그림의 미제작 상태를 표시하고 필요한 설치·실행을 안내한다. 제작기를 복제하거나 성공으로 가장하지 않는다. 정확한 수치 차트는 [data](data.md)의 plotting 경로를 쓴다.
+If diagram-design is unavailable or its tools fail, finish the feasible explanation, tables, and brief. Mark requested figures unproduced and explain the needed installation/execution. Do not duplicate the producer or report success. Exact numerical charts follow the plotting workflow in [data](data.md).
 
-## 선택형 산출물
+## Scale deliverables to the request
 
-짧은 답변에는 파일 불필요. 공유 문서가 필요하면 Markdown/HTML과 요청된 assets, 재확인할 source·figure brief를 함께 둔다. diagram-design의 self-contained diagram HTML과 이 스킬의 **자산 폴더를 동반한 설명 HTML**은 다른 산출물이다.
+Short answers need no files. For shared documents, include Markdown/HTML, requested assets, and traceable sources/briefs. diagram-design's self-contained diagram HTML and this skill's explanation HTML with accompanying asset folders are different deliverables.
 
-## `assemble.py` 입력 계약
+## `assemble.py` input contract
 
-[document.json](../assets/document.json)은 실행 가능한 최소 예시다. JSON은 agent가 근거를 분석한 뒤 작성한다. 내용은 plain text이며 HTML/Markdown 구문을 평가하지 않는다.
+[document.json](../assets/document.json) is a runnable minimal example. The agent authors JSON after analyzing evidence. Content is plain text; HTML/Markdown syntax is not evaluated. Adapt authored content to the audience's language.
 
-- top-level: `title`, `language`, `summary`, `sources`, `claims`, `sections`.
-- source: 고유 `id`, `label`, 재확인 위치 `location`, 버전/내용 식별 `version`, optional `href`.
-- claim: 고유 `id`, `text`, `kind` (`fact`, `inference`, `proposal`, `unknown`), `source_ids`, `basis`. fact/inference는 source 필수; proposal/unknown은 빈 배열 가능. basis에는 적용 조건·추론·미확인 사유를 쓴다.
-- section: 고유 `id`, `heading`, `blocks`.
-- block: `type` = `paragraph` (`text`), `list` (`items`), `code` (`text`, `language`), `table` (`headers`, `rows`), `figure` (`path`, `alt`, `caption`, `brief`). optional `claim_ids`로 인접 주장 연결.
-- figure: 실제 local SVG/PNG만 허용. path·brief는 JSON 폴더 안의 상대 경로. 명세는 Markdown 파일. 의미 있는 `alt`, `caption` 필수. optional `display_width`는 검토한 CSS pixel 폭(64~16384)이다. 기본은 이미지 고유 폭이다. 예: 글자 12px인 diagram은 원래 폭 유지, 큰 PNG chart는 축·라벨이 읽히는 폭을 지정. SVG의 표시 폭도 명시할 수 있다. 조립기는 의미나 적절한 글자 크기를 판단하지 않는다.
-- source `href`는 HTTP(S) 또는 **입력 JSON 기준** 상대 파일 링크. 로컬 출처 링크는 존재를 확인하고 output 위치에 맞춰 재계산한다. source 링크는 상위 폴더의 근거 파일을 가리킬 수 있지만 자산 복사는 입력 폴더 안으로 제한한다. 위험한 URL scheme·missing asset·중복 ID·미해결 claim/source·불완전 table은 실패 처리.
+- Top level: `title`, `language`, `summary`, `sources`, `claims`, `sections`.
+- Source: unique `id`, `label`, traceable `location`, identifying `version`, optional `href`.
+- Claim: unique `id`, `text`, `kind` (`fact`, `inference`, `proposal`, `unknown`), `source_ids`, `basis`. Facts and inferences require sources; proposals and unknowns may use an empty array. Use `basis` for conditions, reasoning, or why something remains unknown.
+- Section: unique `id`, `heading`, `blocks`.
+- Block `type`: `paragraph` (`text`), `list` (`items`), `code` (`text`, `language`), `table` (`headers`, `rows`), or `figure` (`path`, `alt`, `caption`, `brief`). Optional `claim_ids` connect adjacent claims.
+- Figure: an existing local SVG/PNG. `path` and `brief` are relative paths inside the JSON directory. The brief is Markdown. Meaningful `alt` and `caption` are required. Optional `display_width` is a reviewed width in CSS pixels (64–16384); the default is intrinsic width. Preserve a diagram's original width for 12px labels; a larger chart PNG may use a narrower width after verifying labels and axes. Specify SVG display width as needed. The assembler does not judge meaning or legibility.
+- Source `href`: HTTP(S) or a file path relative to the **input JSON**. Local source links are checked and rebased for the output location. They may point to evidence in parent folders; copied assets must stay inside the input directory. Unsafe URL schemes, missing assets, duplicate IDs, unresolved claim/source references, and ragged tables are rejected.
+- The `language` tag controls generated document labels: English for `en`/`en-*`, Korean for `ko`/`ko-*`, and English fallback for other tags. It does not translate authored blocks. English templates and separate `.ko` reference templates are provided; choose and adapt them to the requested language.
 
 ```bash
 python3 <skill-dir>/scripts/assemble.py document.json --out dist
 python3 <skill-dir>/scripts/assemble.py document.json --check
 ```
 
-결과: `dist/index.html`, `dist/explanation.md`, `dist/assets/…`, `dist/briefs/…`. 원본 JSON은 그대로 보존한다. HTML은 script 없이 CSP와 escaping을 적용한다. 같은 입력을 같은 output 폴더에 다시 조립할 수 있지만 index.html/explanation.md는 교체되므로 전용 생성 폴더를 쓴다. 자산은 내용 hash로 이름 붙여 충돌을 피한다. HTML의 그림은 원래 크기를 유지하고 해당 영역 안에서 가로로 스크롤한다. print에서는 페이지 폭에 맞춘다. 로컬 출처 파일을 동반하지 않고 공유하면 source 링크는 접근할 수 없으므로 공유 범위를 확인한다.
+Outputs: `dist/index.html`, `dist/explanation.md`, `dist/assets/…`, `dist/briefs/…`. The source JSON is preserved. HTML uses escaping and CSP without scripts. Reassembly replaces index.html/explanation.md, so use a dedicated generated folder. Assets use content-hash filenames to avoid collisions. Figures keep their display width inside a local horizontal scroller and fit the page in print. Source links need their evidence files when shared; check the sharing scope.

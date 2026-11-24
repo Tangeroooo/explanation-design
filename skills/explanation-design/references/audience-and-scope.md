@@ -1,18 +1,18 @@
-# 독자와 범위
+# Audience and scope
 
-독자 직함보다 답변 후 할 일을 기준으로 깊이를 정한다.
+Choose depth by what the reader needs to do after reading, rather than by their job title.
 
-| 독자가 할 일 | 포함할 것 | 줄일 수 있는 것 |
+| Reader's next action | Include | May shorten |
 |---|---|---|
-| 코드 수정·장애 조사 | 함수·상태 소유자·오류 경로·재현 조건 | 이미 아는 일반 배경 |
-| 운영·도입 결정 | 목표·제약·비용·실패 영향·선택 전환 조건 | 판단에 영향 없는 내부 함수 |
-| 처음 개념 이해 | 구체적 입력 하나·핵심 용어·원인과 결과 | 구현 세부, 단 중요한 보장은 유지 |
+| Change code or investigate a failure | Functions, state owners, error paths, reproduction conditions | Familiar background |
+| Make an operational or adoption decision | Goals, constraints, costs, failure impact, conditions that change the choice | Internal functions that do not affect the decision |
+| Understand an unfamiliar concept | One concrete input, essential terms, causes and outcomes | Implementation detail, while preserving important guarantees |
 
-판단 질문: 무엇을 설명하는가? 왜 지금 필요한가? 독자는 무엇을 아는가? 어느 버전·경계까지인가? 깊이는 이 질문에 답하는 데 필요한 만큼만 늘린다.
+Determine what is being explained, why it matters now, what the reader knows, and which version and boundary are covered. Increase depth only as needed to answer those questions.
 
-- 질문이 “응답 후 데이터가 남는가?”라면 모듈 목록보다 응답과 저장의 순서가 우선이다.
-- “비개발자용”이어도 “접수”를 “저장 완료”로 바꾸지 않는다. 용어를 풀되 조건을 보존한다.
-- 출처가 없으면 일반 원리는 설명할 수 있지만 특정 시스템의 실제 동작으로 말하지 않는다.
-- 출력 형식이 없으면 짧은 설명은 채팅, 비교는 표, 반복 참조·공유가 필요한 긴 자료는 문서를 선택한다. 파일 저장은 요청·문맥상 필요할 때만 한다.
+- For “Does the data survive after the response?”, prioritize the order of response and persistence over a module inventory.
+- For a nontechnical audience, explain terms while preserving conditions. “Accepted” must not become “durably stored.”
+- Without sources, explain general principles without presenting them as the actual behavior of a specific system.
+- If no format is specified, use chat for short explanations, tables for comparisons, and documents for longer material that needs repeated reference or sharing. Save files when requested or needed in context.
 
-내부 작업용 한 줄: `독자 / 해결할 질문 / 이후 할 판단 / 이미 아는 것 / 범위 / 확인 못 한 것`. 이를 모두 사용자에게 질문지로 보내지 않는다.
+A useful internal note is `audience / question / next decision / prior knowledge / scope / unverified areas`. Do not turn the entire note into a questionnaire for the user.

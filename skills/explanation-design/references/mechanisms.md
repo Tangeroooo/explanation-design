@@ -1,20 +1,20 @@
-# 실행·상태·실패 설명
+# Explain execution, state, and failure
 
-`입력 하나 → 접수 → 실행 시작 → 부수 효과 → 영속화/가시성 → 응답`을 출처에 맞춰 분해한다. 모든 시스템이 이 순서를 갖는 것은 아니다. 관측되지 않은 단계를 추가하지 않는다.
+Break down `one input → acceptance → execution start → side effects → persistence/visibility → response` according to the evidence. Systems need not follow this order. Do not add unobserved stages.
 
-## 시나리오로 확인
+## Check concrete scenarios
 
-| 조건 | 추적할 것 |
+| Condition | Trace |
 |---|---|
-| 정상 | 누가 언제 상태를 바꾸고 어떤 조건으로 성공하는가 |
-| 용량 초과 | 대기·거절·drop 중 무엇이며, 누가 이를 아는가 |
-| timeout·취소 | caller가 포기한 뒤 작업이 계속되는가, 효과가 이미 생겼는가 |
-| retry | 전체 작업·부분 작업 중 무엇을 다시 하며 중복 효과가 가능한가 |
-| crash·재시작 | 메모리와 영속 상태 중 무엇이 남고 복구 주체는 누구인가 |
-| 병렬 입력 | 순서·동시 실행·상태 경쟁을 제한하는 실제 장치가 있는가 |
+| Normal operation | Who changes state, when, and under which success condition |
+| Capacity exceeded | Waiting, rejection, or dropping, and who knows which occurred |
+| Timeout or cancellation | Whether work continues after the caller gives up, and effects already applied |
+| Retry | Whether the whole task or a part repeats, and whether effects can duplicate |
+| Crash or restart | Memory and persistent state that remain, and the recovery owner |
+| Parallel inputs | Actual mechanisms limiting order, concurrent execution, and state races |
 
-의도는 주석·spec에서, 현재 동작은 코드와 실행에서, 위험은 가능한 조건 조합에서 찾는다. 예를 들어 “ack 실패”와 “sink 실패”는 결과가 다르다. 전자는 이미 효과가 발생했을 수 있으므로 단순 실패 하나로 합치지 않는다.
+Find intent in comments/specifications, actual behavior in code and execution, and risks in possible combinations of conditions. An ack failure and a sink failure can leave different outcomes. The former may occur after an effect has already happened; do not collapse them into one generic failure.
 
-시간 그림에서는 “먼저 호출”과 “먼저 완료”, wall-clock과 논리적 happens-before를 구분한다. latency 합산 시 병렬 구간을 직렬로 더하지 않는다. queue 길이만으로 대기 시간을 추정하려면 처리율·정상성 등 가정을 명시한다.
+In timing diagrams, distinguish first-called from first-completed and wall-clock time from logical happens-before. Do not add parallel latency intervals as though they were serial. If estimating waits from queue depth, state assumptions about service rate and steady state.
 
-위험도는 가능 조건·실제 영향·복구 가능성·관측 여부로 평가한다. 코드상 가능하다는 이유로 높은 발생 빈도나 운영 사고를 단정하지 않는다. 대처는 단기 관측·제한, 중기 보장 강화, 장기 구조 변경으로 나눌 수 있지만 작은 질문에 형식적으로 강제하지 않는다.
+Assess risk by enabling conditions, actual impact, recoverability, and observation. A possible code path alone does not establish high frequency or an operational incident. Responses may progress from short-term observation/limits to stronger guarantees and later structural changes, without forcing this format onto small questions.

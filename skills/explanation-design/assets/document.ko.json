@@ -1,0 +1,8 @@
+{
+  "title": "조립 입력 예시",
+  "language": "ko",
+  "summary": "이 예시는 사람이 작성한 설명을 HTML과 Markdown으로 조립합니다.",
+  "sources": [{"id": "S1", "label": "조립 계약", "location": "references/rendering.ko.md: 입력 계약", "version": "example-v1"}],
+  "claims": [{"id": "C1", "text": "조립기는 설명 품질을 판단하지 않습니다.", "kind": "fact", "source_ids": ["S1"], "basis": "기계적인 구조 검증과 조립만 수행하는 계약입니다."}],
+  "sections": [{"id": "scope", "heading": "도구의 범위", "blocks": [{"type": "paragraph", "text": "근거 분석과 문장 작성은 agent가 담당하고, 조립기는 이미 작성한 block을 출력합니다.", "claim_ids": ["C1"]}]}]
+}

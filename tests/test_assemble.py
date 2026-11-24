@@ -89,6 +89,33 @@ class AssemblyTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             assembler.validate(self.doc, self.base)
 
+    def test_document_labels_follow_language_without_translating_content(self):
+        (self.base / "figure.svg").write_text("<svg/>")
+        (self.base / "brief.md").write_text("Brief")
+        self.doc["sections"][0]["blocks"].append({"type": "figure", "path": "figure.svg", "brief": "brief.md", "alt": "Authored label", "caption": "Authored caption"})
+        self.doc["claims"].append({"id": "C2", "text": "Unverified claim", "kind": "unknown", "source_ids": [], "basis": "No implementation supplied"})
+        original_text = self.doc["sections"][0]["blocks"][0]["text"]
+        for language, expected in [("en", "en"), ("en-US", "en"), ("ko", "ko"), ("ko-KR", "ko"), ("fr", "en")]:
+            with self.subTest(language=language):
+                self.doc["language"] = language
+                out = self.base / language
+                assembler.assemble(self.doc, self.base, out)
+                page = (out / "index.html").read_text()
+                markdown = (out / "explanation.md").read_text()
+                labels = assembler.LABELS[expected]
+                self.assertIn(f"lang='{language}'", page)
+                for key in ("claims_heading", "sources_heading", "figure_brief"):
+                    self.assertIn(labels[key], page)
+                    self.assertIn(labels[key], markdown)
+                self.assertIn(labels["figure_region"], page)
+                self.assertIn(labels["scroll_hint"], page)
+                self.assertIn(labels["claim_refs"], markdown)
+                self.assertIn(labels["kinds"]["fact"], page)
+                self.assertIn(labels["none"], page)
+                self.assertIn(original_text, page)
+                if expected == "en":
+                    self.assertNotRegex(page, r"[가-힣]")
+
 
 if __name__ == "__main__":
     unittest.main()

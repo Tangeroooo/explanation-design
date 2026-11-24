@@ -95,3 +95,19 @@ catalog 경로가 실제 설치 위치와 달라 파일 검색으로 활성 설�
 구현 커밋 [ba484cf](https://github.com/Tangeroooo/explanation-design/commit/ba484cf5cc1714536e1c56d33ae35f34ccb99d41)를 `main`에 non-force push했다. API로 public 설정과 default branch를 다시 확인했다. 해당 커밋의 [GitHub Actions check](https://github.com/Tangeroooo/explanation-design/actions/runs/45359260602)는 **success**였다.
 
 게시 후 새 임시 프로젝트에서 `npx skills@1.9.0 add Tangeroooo/explanation-design --skill explanation-design --agent codex claude-code --yes --copy`를 실행했다. 원격 clone·단일 스킬 발견·양쪽 agent 설치 성공. 각 agent에 설치된 **20개 파일**의 SHA-256이 로컬 게시 원본과 모두 일치했다. 두 설치본의 package validator와 설치본 template을 이용한 assembler도 실제 실행해 통과했다. 사용자 global 설치·설정은 변경하지 않았다.
+
+## English defaults and Korean reference editions — 2026-11-24
+
+Default skill instructions, all 13 references, templates, sample JSON, Codex UI metadata, and README are now in English. The original Korean editions are preserved in 19 separate `.ko` files, including [README.ko.md](../README.ko.md) and [SKILL.ko.md](../skills/explanation-design/SKILL.ko.md). Links in the Korean skill resolve to Korean references and templates. Default entry points remain `SKILL.md` and `agents/openai.yaml`; explanations continue to follow the user's requested language. Existing Korean fixtures and evaluation artifacts remain in their original language.
+
+The assembler previously emitted Korean document labels even for English input. Generated labels now follow `language`: English for `en`/`en-*`, Korean for `ko`/`ko-*`, and English fallback for other tags. Authored content is preserved without translation. Both language editions of the assembly contract document this behavior.
+
+Validation performed:
+
+- `python3 scripts/check.py`: **14 unittest cases passed**, including five language-tag cases for generated headings, claim statuses, figure/accessibility labels, fallback, and preservation of authored content.
+- Official skill-creator `quick_validate.py`: passed. All 19 English/Korean file pairs exist; English default documentation contains no Korean prose. All local documentation links resolve. The package validator now covers both language editions and sample inputs.
+- The three existing Korean examples regenerated **byte-for-byte unchanged**, including HTML and Markdown.
+- Actual English and Korean sample HTML renders at desktop 1440px and mobile 390px had no page overflow. English headings were English; Korean headings remained Korean. Generated screenshots were opened and inspected for legibility and clipping. [Browser observations](visual/language-observations.json) are preserved.
+- `npx skills@1.9.0` discovered **one skill** with the reference editions included. Local installation for Codex and Claude Code succeeded; all **38 package files per agent** matched source SHA-256 values. Both installed package validators passed. Global user configuration was not changed.
+
+This translation update does not establish new production-system guarantees or cross-agent behavioral evaluation. Earlier independent behavioral evaluations above remain historical results; the new checks cover translated resources, assembly language handling, preservation of Korean outputs, and packaging.

@@ -11,7 +11,31 @@ import re
 from pathlib import Path
 from urllib.parse import quote, unquote, urlsplit, urlunsplit
 
-KINDS = {"fact": "사실", "inference": "추론", "proposal": "제안", "unknown": "미확인"}
+KINDS = ("fact", "inference", "proposal", "unknown")
+LABELS = {
+    "en": {
+        "kinds": {"fact": "Fact", "inference": "Inference", "proposal": "Proposal", "unknown": "Unknown"},
+        "figure_region": "Scroll horizontally to view the full figure",
+        "figure_brief": "Production brief",
+        "scroll_hint": "Scroll horizontally to view wide figures in full.",
+        "claim_refs": "Supporting claims",
+        "claims_heading": "Claims and evidence",
+        "sources_heading": "Sources",
+        "source_label": "Sources",
+        "none": "None",
+    },
+    "ko": {
+        "kinds": {"fact": "사실", "inference": "추론", "proposal": "제안", "unknown": "미확인"},
+        "figure_region": "가로로 스크롤하여 전체 그림 보기",
+        "figure_brief": "제작 명세",
+        "scroll_hint": "넓은 그림은 가로로 스크롤해 전체를 볼 수 있습니다.",
+        "claim_refs": "근거 주장",
+        "claims_heading": "주장과 근거",
+        "sources_heading": "출처",
+        "source_label": "출처",
+        "none": "없음",
+    },
+}
 ID = re.compile(r"[A-Za-z][A-Za-z0-9_-]*\Z")
 
 
@@ -147,6 +171,7 @@ def copy_asset(base, value, out, folder):
 
 def assemble(doc, base, out):
     validate(doc, base)
+    labels = LABELS.get(doc["language"].split("-", 1)[0].lower(), LABELS["en"])
     out = out.resolve()
     out.mkdir(parents=True, exist_ok=True)
     h = html.escape
@@ -174,20 +199,21 @@ def assemble(doc, base, out):
                 asset = copy_asset(base, b["path"], out, "assets")
                 brief = copy_asset(base, b["brief"], out, "briefs")
                 width = f" width='{b['display_width']}'" if "display_width" in b else ""
-                hs.append(f"<figure><div class='scroll' tabindex='0' role='region' aria-label='가로로 스크롤하여 전체 그림 보기'><img src='{asset}'{width} alt='{h(b['alt'], quote=True)}'></div><figcaption>{h(b['caption'])} <a href='{brief}'>제작 명세</a> · 넓은 그림은 가로로 스크롤해 전체를 볼 수 있습니다.</figcaption></figure>")
-                ms.append(f"![{md(b['alt'])}]({asset})\n\n{md(b['caption'])} [제작 명세]({brief})")
+                hs.append(f"<figure><div class='scroll' tabindex='0' role='region' aria-label='{h(labels['figure_region'], quote=True)}'><img src='{asset}'{width} alt='{h(b['alt'], quote=True)}'></div><figcaption>{h(b['caption'])} <a href='{brief}'>{h(labels['figure_brief'])}</a> · {h(labels['scroll_hint'])}</figcaption></figure>")
+                ms.append(f"![{md(b['alt'])}]({asset})\n\n{md(b['caption'])} [{md(labels['figure_brief'])}]({brief})")
             if b.get("claim_ids"):
                 hs.append("<p class='claims'>" + " · ".join(f"<a href='#claim-{i}'>{i}</a>" for i in b["claim_ids"]) + "</p>")
-                ms.append("근거 주장: " + ", ".join(f"[{i}](#claim-{i.lower()})" for i in b["claim_ids"]))
+                ms.append(labels["claim_refs"] + ": " + ", ".join(f"[{i}](#claim-{i.lower()})" for i in b["claim_ids"]))
         hs.append("</section>")
-    hs.append("<section><h2>주장과 근거</h2>")
-    ms.append("## 주장과 근거")
+    hs.append(f"<section><h2>{h(labels['claims_heading'])}</h2>")
+    ms.append("## " + labels["claims_heading"])
     for c in doc["claims"]:
-        refs = ", ".join(c["source_ids"]) or "없음"
-        hs.append(f"<article id='claim-{c['id']}'><h3>{c['id']} · {KINDS[c['kind']]}</h3><p>{h(c['text'])}</p><p>{h(c['basis'])}</p><p>출처: {h(refs)}</p></article>")
-        ms.extend([f"### claim-{c['id'].lower()}", f"{KINDS[c['kind']]}: {md(c['text'])}\n\n{md(c['basis'])}\n\n출처: {md(refs)}"])
-    hs.append("</section><section><h2>출처</h2><ul>")
-    ms.append("## 출처")
+        refs = ", ".join(c["source_ids"]) or labels["none"]
+        kind_label = labels["kinds"][c["kind"]]
+        hs.append(f"<article id='claim-{c['id']}'><h3>{c['id']} · {h(kind_label)}</h3><p>{h(c['text'])}</p><p>{h(c['basis'])}</p><p>{h(labels['source_label'])}: {h(refs)}</p></article>")
+        ms.extend([f"### claim-{c['id'].lower()}", f"{kind_label}: {md(c['text'])}\n\n{md(c['basis'])}\n\n{labels['source_label']}: {md(refs)}"])
+    hs.append(f"</section><section><h2>{h(labels['sources_heading'])}</h2><ul>")
+    ms.append("## " + labels["sources_heading"])
     for s in doc["sources"]:
         label = f"{s['id']} · {s['label']} · {s['location']} · {s['version']}"
         href = output_url(s["href"], base, out) if "href" in s else None

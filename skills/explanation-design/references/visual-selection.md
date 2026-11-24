@@ -1,21 +1,21 @@
-# 표현 선택
+# Select the representation
 
-| 전달할 관계 | 우선 표현 | 그림으로 전환할 조건 |
+| Relationship to communicate | Start with | Use a visual when |
 |---|---|---|
-| 단일 사실·조건 | 짧은 문장 | 보통 불필요 |
-| 정확한 속성·대안 | 표 | topology 변화가 선택을 좌우함 |
-| 실제 분기·API 사용 | 짧은 코드 | 여러 actor·상태·실패가 얽힘 |
-| 책임·경계·연결 | architecture | 연결과 경계 자체가 질문 |
-| 호출의 시간 순서 | sequence | 응답과 부수 효과 순서가 중요 |
-| guard·상태 변화 | state / flowchart | 예외 분기를 따라가야 함 |
-| 수치 차이·분포 | 표 또는 plotting chart | 규모·추세·분포가 표보다 분명함 |
+| One fact or condition | Short prose | Usually unnecessary |
+| Exact attributes or alternatives | Table | Topology changes determine the choice |
+| Actual branching or API usage | Short code | Multiple actors, states, or failures interact |
+| Responsibilities, boundaries, connections | Architecture view | Connections and boundaries are the question |
+| Calls over time | Sequence view | Response and side-effect ordering matters |
+| Guards and state changes | State diagram or flowchart | The reader needs to follow exceptional branches |
+| Numerical differences or distributions | Table or reproducible chart | Scale, trends, or distributions are clearer visually |
 
-그림마다 하나의 질문과 한 문장 메시지를 먼저 정한다. 명세는 [figure-brief](../assets/figure-brief.md)를 사용한다. source·claim ID와 관계를 연결한다. node만 아니라 **edge에도** 근거를 남긴다. 화살표는 의존·호출·데이터·시간 중 무엇인지 라벨 또는 범례로 정한다.
+Set one question and one-sentence message for each figure. Use the [figure brief](../assets/figure-brief.md). Connect sources and claim IDs to relationships. Record evidence for **edges as well as nodes**. Labels or a legend should identify whether arrows mean dependency, calls, data, or time.
 
-- 서로 다른 보장을 가진 단계는 “처리 완료” 하나로 합치지 않는다.
-- 색은 구분을 돕되 사실/제안·성공/실패를 색에만 의존하지 않는다.
-- node가 많아 질문을 잃으면 overview + detail로 분리하고 연결 기준을 명시한다.
-- 생략한 것 중 해석을 바꿀 수 있는 항목은 캡션·본문에 쓴다. 재시도나 외부 저장소를 생략하고 무손실을 암시하지 않는다.
-- 정확한 데이터 차트는 [data](data.md)를 따른다. 장식용 면적·아이콘 크기로 수치를 암시하지 않는다.
+- Do not merge stages with different guarantees into a single “completed” stage.
+- Color may help, but fact/proposal and success/failure distinctions must also be readable without it.
+- Split into overview and detail when node count obscures the question, and explain how the views connect.
+- State omissions that could change interpretation in captions or prose. Omitting retries or external storage must not imply losslessness.
+- For exact quantitative charts, follow [data](data.md). Decorative areas and icon sizes must not imply numerical values.
 
-그림을 지웠을 때 잃는 이해가 없다면 만들지 않는다. 그림을 봐도 근거가 늘지는 않는다. 의미 검증은 제작 이후에도 explanation-design의 책임이다.
+If removing a figure loses no understanding, do not create it. A figure adds no evidence by itself. Semantic verification remains explanation-design's responsibility after production.

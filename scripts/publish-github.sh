@@ -64,7 +64,7 @@ if [[ "$exists" == yes ]]; then
   fi
 fi
 # Stage only this project's deliverables, preserving all other files.
-git add -- .gitignore README.md requirements-dev.txt skills examples evals scripts tests .github
+git add -- .gitignore README.md README.ko.md requirements-dev.txt skills examples evals scripts tests .github
 git diff --cached --check
 if ! git diff --cached --quiet; then
   git commit -m "Implement and validate evidence-based explanation-design skill"

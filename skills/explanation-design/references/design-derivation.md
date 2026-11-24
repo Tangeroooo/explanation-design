@@ -1,29 +1,29 @@
-# 제약에서 설계 도출
+# Derive a design from constraints
 
-추천을 짧게 먼저 말한 뒤, 추천이 성립하는 조건을 보여준다. 목표·제약·현재 구현을 혼합하지 않는다.
+State a brief recommendation first, then show the conditions under which it holds. Keep goals, constraints, and current implementation distinct.
 
-## 판단 재료
+## Inputs to the decision
 
-- 목표와 수용 기준: 어떤 관측 결과면 성공인가? 수치가 없으면 만들어내지 말고 정성 기준이나 확인 과제로 둔다.
-- 유지할 계약과 변경 가능한 내부를 구분한다. 기존 API·storage format·응답 의미를 바꿀 권한이 있는지 문맥을 확인한다.
-- workload, 오류 허용, 운영 인력, migration·rollback, 시간·비용 제약을 정리한다.
-- 현실적 대안 2~3개를 같은 평가 축으로 비교한다. 명백히 부적합한 대안을 들러리로 추가하지 않는다. 사용자가 지정한 후보가 필수 조건을 어기면 후보를 유지하고 탈락 이유와 가능해지는 조건을 설명한다.
+- Goals and acceptance criteria: which observations would count as success? If numbers are unavailable, use qualitative criteria or explicit investigation items rather than inventing targets.
+- Contracts to preserve versus internals that may change. Establish from context whether changes to existing APIs, storage formats, or response semantics are authorized.
+- Workload, tolerated failures, operational staffing, migration/rollback, time, and cost constraints.
+- Two or three realistic alternatives evaluated on shared criteria. Do not add clearly unsuitable straw alternatives. If the user specified a candidate that violates a requirement, retain it and explain the disqualifying condition and what would make it viable.
 
-각 대안은 `module/API 변화 → 상태·data/control flow → 얻는 효과 → 비용 → 실패 조건`으로 평가한다. 임의 점수보다 실제 조건을 쓴다. 예: process-local cache는 구현이 작지만 다른 process의 write를 즉시 보지 못한다. invalidation을 구현하지 않았는데 있다고 가정하지 않는다.
+Evaluate each option through `module/API changes → state and data/control flow → benefits → costs → failure conditions`. Use concrete conditions rather than arbitrary scores. A process-local cache may be small to implement but does not immediately observe writes in other processes. Do not assume invalidation exists unless implemented.
 
-## 추천을 구현 가능한 수준으로
+## Make the recommendation actionable
 
 ```text
-if 같은 process 범위의 stale read가 허용됨:
-    local TTL cache 후보
-elif 여러 process가 동일 freshness 계약을 공유해야 함:
-    shared cache 또는 직접 조회 비교
+if stale reads within one process are acceptable:
+    consider a local TTL cache
+elif multiple processes must share the same freshness contract:
+    compare a shared cache with direct reads
 else:
-    freshness 계약부터 확인
+    establish the freshness contract first
 ```
 
-추천안에는 선택 이유와 **추천이 바뀌는 조건**을 함께 쓴다. 설계 의도와 실제 구현 단계를 분리한다. 코드를 읽었으면 실제 file/function/struct/trait와 연결하고, 읽지 않았으면 제안한 이름임을 밝힌다.
+Explain why the recommendation fits and **which conditions would change it**. Separate design intent from implementation steps. If code was inspected, connect changes to actual files/functions/structs/traits; otherwise mark names as proposed.
 
-상태 migration과 concurrency도 설계 일부다. 구버전 writer가 남아 있는 동안의 compatibility, 부분 배포·중복 실행·rollback 후 데이터 해석을 확인한다.
+State migration and concurrency are part of the design. Check compatibility while old writers remain, partial rollout, duplicate execution, and interpretation of data after rollback.
 
-적용 순서: 단기는 계약·관측·최소 변경, 중기는 구현·integration 및 장애 검증, 장기는 규모 변화에 따른 재평가. 각 단계에 확인 방법을 둔다. 남은 질문은 결론에 어떤 영향을 주는지 설명하고, 이미 확인 가능한 정보는 직접 조사한다.
+Sequence adoption: short term for contracts, observation, and minimal changes; medium term for implementation, integration, and failure checks; long term for reassessment as scale changes. Give verification steps for each phase. Explain how remaining questions affect the conclusion and investigate information already available.

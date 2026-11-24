@@ -1,24 +1,24 @@
-# 검증과 개선
+# Verification and improvement
 
-검증 도구가 측정하는 범위를 넘어 성공을 주장하지 않는다.
+Do not claim more than a check actually establishes.
 
-| 층 | 확인 | 증거 |
+| Layer | Check | Evidence |
 |---|---|---|
-| 구조 | frontmatter·reference·JSON·asset·링크·export 파일 | 실행 명령·exit/result |
-| 근거·의미 | 주장과 출처, 인과·실행·제약·실패, 본문/표/그림 일치 | 읽은 위치·계산·실행 시나리오·수정 내역 |
-| 시각 | 실제 render의 잘림·겹침·폰트·방향·축·가독성·좁은 화면 | 실제로 본 PNG/HTML·viewport·발견한 결함 |
+| Structural | Frontmatter, references, JSON, assets, links, exports | Commands run and their outcomes |
+| Evidence and meaning | Claims and sources, causality, execution, constraints, failures, prose/table/figure agreement | Inspected locations, calculations, scenarios, corrections |
+| Visual | Actual renders: clipping, overlaps, fonts, directions, axes, legibility, narrow screens | PNG/HTML actually viewed, viewport, observed defects |
 
-## 품질 질문
+## Quality questions
 
-- 첫 문단이 핵심 질문에 답하는가? 독자가 결론과 한계를 다시 설명할 수 있는가?
-- 중요한 주장에 재확인 가능한 근거가 있는가? 사실·추론·제안·미확인이 섞이지 않았는가?
-- 입력 → 처리 → 상태 변화 → 결과 사이에 비약이 없는가?
-- 결과를 바꿀 제약·실패·반례를 빠뜨리지 않았는가?
-- 선택한 표현이 이해를 늘리는가? 짧은 질문에 과잉 제작하지 않았는가?
-- 그림의 edge·순서·단위·범위가 본문과 같은가? 생략이 보장을 왜곡하지 않는가?
+- Does the opening answer the main question? Can the reader explain the conclusion and its limits afterward?
+- Are important claims traceable to evidence? Are facts, inferences, proposals, and unknowns distinct?
+- Is the connection from input to processing, state change, and outcome justified?
+- Are constraints, failures, and counterexamples that could change the result included?
+- Does the representation help? Is a short question being overproduced?
+- Do figure edges, order, units, and scope match the prose? Do omissions distort guarantees?
 
-## 실행과 수정 기록
+## Record execution and corrections
 
-현실적인 입력을 실제로 풀고 결과를 평가한다. 정답 문구를 regex로 맞추는 것은 행동 평가가 아니다. 코드·설계·데이터처럼 성격이 다른 요청에서 확인한다. 발견한 문제는 원인과 수정을 기록한 뒤 해당 사례를 재확인한다. 다른 사례에도 유효한 일반화인지 확인하고 예제 특화 규칙의 누적을 피한다.
+Solve realistic inputs and evaluate actual outcomes. Matching expected wording with regexes is not behavioral evaluation. Check different request types such as code, design, and data. Record each defect, its cause, and the correction, then rerun the affected case. Ensure the correction generalizes rather than accumulating example-specific rules.
 
-시각 결과를 열어보지 않았다면 “시각 미검증”. browser/export 도구가 없으면 가능한 구조·의미 검증을 완료하고 실제 한계를 명시한다. syntax 통과만으로 설명 품질·시각 품질을 통과 처리하지 않는다. 독립 평가를 수행했으면 평가 입력·자율성·범위와 실제 산출물을 보존한다.
+If no visual result was opened, mark it visually unverified. When browser/export tools are unavailable, finish structural and semantic checks and state the actual limits. Syntax checks do not establish explanation or visual quality. For independent evaluation, preserve its inputs, independence, scope, and actual artifacts.

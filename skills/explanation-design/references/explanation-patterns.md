@@ -1,16 +1,16 @@
-# 설명 전략 선택
+# Choose an explanation strategy
 
-| 독자가 막힌 지점 | 전략 | 확인할 함정 |
+| Reader's difficulty | Strategy | Check for |
 |---|---|---|
-| 무엇이 어디 책임인가 | 경계와 소유권 | 논리 모듈을 process로 오해시키지 않는가 |
-| 왜 이런 결과인가 | 원인 → 상태 변화 → 결과 | 상관을 원인으로 바꾸지 않는가 |
-| 실제로 무슨 일이 일어나는가 | 구체적 입력의 실행 추적 | 관측하지 않은 순서·타이밍을 암시하지 않는가 |
-| 언제 가능하고 불가능한가 | 상태 전이 + guard | 에러가 난 뒤의 상태가 빠지지 않았는가 |
-| A와 B 중 무엇인가 | 동일 축 비교 + 조건부 선택 | 다른 workload·보장·비용을 섞지 않는가 |
-| 추상 개념이 이해되지 않음 | 작은 예와 반례 | 예의 숫자를 일반 보장으로 확장하지 않는가 |
+| What is responsible for what? | Boundaries and ownership | Mistaking logical modules for processes |
+| Why did this outcome occur? | Cause → state change → outcome | Turning correlation into causation |
+| What actually happens? | Trace a concrete input | Implying unobserved order or timing |
+| When is an operation possible? | State transitions and guards | Omitting the state after an error |
+| Should I choose A or B? | Shared comparison criteria and conditional choice | Mixing workloads, guarantees, or cost bases |
+| An abstract concept is unclear | Small example and counterexample | Turning example values into general guarantees |
 
-“캐시는 빠르다”보다 “동일 key가 메모리에 있고 TTL 안이면 저장소 호출을 생략한다. miss·만료·다른 process에서는 저장소를 읽는다”가 조건과 효과를 전달한다.
+“The cache is fast” is less useful than “When the same key is in memory and within its TTL, the store call is skipped. A miss, expiry, or another process reads the store.” The latter connects conditions to effects.
 
-비유는 낯선 관계를 소개할 때만 쓴다. 예를 들어 queue를 대기줄로 비유하면 입력 순서를 이해시키지만, 병렬 처리·재배달·우선순위는 단일 대기줄과 다르다고 연결한다. 실제 보장이 다르면 비유보다 짧은 실행 예를 쓴다.
+Use analogies to introduce unfamiliar relationships. A queue as a waiting line can explain arrival order, but parallel processing, redelivery, and priorities differ from one simple line. State those limits. Prefer a short execution example when an analogy would distort the guarantees.
 
-하나의 그림에 구조와 실행 시간과 배포를 모두 넣으려 하지 않는다. 주 질문이 구조면 구조를, 순서면 sequence를 중심으로 놓고 나머지는 별도 표·캡션으로 연결한다.
+Avoid forcing structure, execution time, and deployment into one figure. Center the main question: use a structural view for boundaries or a sequence view for order, and connect secondary details through a separate table or caption.

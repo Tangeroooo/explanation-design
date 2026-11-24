@@ -1,29 +1,29 @@
-# 코드로 실제 동작 확인
+# Establish actual behavior from code
 
-## 추적 단위
+## Unit of tracing
 
-진입점에서 구체적 입력 하나를 따라간다. `rg`로 정의뿐 아니라 호출자·오류 처리·상태 갱신을 찾는다. 호출 대상의 구현·계약을 못 읽었으면 그 경계에서 보장을 멈춘다.
+Follow one concrete input from an entry point. Use `rg` to find callers, error handling, and state updates as well as definitions. Stop guarantees at boundaries whose implementation or contract you have not inspected.
 
-간단한 추적 표: `입력/계기 | 함수 | 읽는 상태 | 바꾸는 상태·부수 효과 | 반환·예외 | 근거`.
+A compact trace table is `input/trigger | function | state read | state changed and side effects | return/exception | evidence`.
 
-1. 진입점의 검증·분기와 호출 순서 확인.
-2. mutable 상태와 실제 소유자 확인: 요청, task, process, 외부 저장소 중 어디인가?
-3. 외부 호출 전후의 상태 변화 확인. 메모리 갱신·전송·영속화·응답을 분리.
-4. 예외가 어디까지 전파되는지, `finally`·defer·drop에서 무엇을 정리하는지 확인.
-5. 반환 값과 관측 가능한 결과를 구분. “호출했다”는 “성공했다”가 아니다.
+1. Check entry-point validation, branches, and call order.
+2. Identify mutable state and its actual owner: request, task, process, or external store.
+3. Inspect state changes around external calls. Separate memory updates, transmission, persistence, and response.
+4. Trace exception propagation and cleanup in `finally`, defer, or drop.
+5. Separate return values from observable outcomes. Calling an operation does not establish its success.
 
-## 실패와 concurrency
+## Failure and concurrency
 
-- `await` 앞뒤에 취소되면 무엇이 남는가? 외부 호출이 성공한 후 반환만 실패할 수 있는가?
-- retry는 어느 연산을 반복하는가? idempotency key의 범위·유효기간·atomicity는 무엇인가?
-- lock은 어떤 객체·process까지 보호하는가? 동일 process의 직렬 테스트로 분산 안전성을 주장하지 않는다.
-- queue에서 꺼냄, 처리 시작, commit, ack, 사용자 응답은 별개일 수 있다. 이름이 아니라 구현과 계약으로 연결한다.
-- resource 수명: connection·file·permit이 언제 획득되고 해제되는가? 오류·timeout·취소 경로도 확인한다.
+- What remains if cancellation occurs before or after an `await`? Could an external effect succeed while the response fails?
+- Which operation is retried? What are the idempotency key's scope, lifetime, and atomicity?
+- Which objects and processes does a lock protect? Serial tests in one process do not establish distributed safety.
+- Dequeue, processing start, commit, ack, and user response can be separate events. Connect them using implementation and contracts, not names.
+- When are connections, files, and permits acquired and released? Inspect error, timeout, and cancellation paths too.
 
-예: `await sink.send(item); await broker.ack(id)`에서 send 성공 후 ack 실패가 가능하면, 재배달 시 중복 전송 가능성을 설명한다. 이 코드만으로 broker 재배달 정책이나 sink 중복 제거 여부를 확정하지 않는다.
+Example: for `await sink.send(item); await broker.ack(id)`, if ack can fail after send succeeds, explain the possibility of duplicate transmission on redelivery. Do not infer the broker's redelivery policy or the sink's deduplication behavior from this code alone.
 
-## 확인 결과 표현
+## Report the findings
 
-의도: 주석·spec에 적힌 목적. 구현: 읽은 코드의 실제 순서와 상태. 실행 관측: 어떤 입력을 실행해 무엇을 봤는지. 위험 조건: 미관측이지만 코드·계약으로 가능한 경로. 이 네 가지를 혼합하지 않는다.
+Separate four things: intent stated in comments/specs; actual order and state in the implementation inspected; execution observations for specified inputs; and unobserved risk conditions allowed by code and contracts.
 
-전체 repository를 못 읽었으면 “이 파일·이 호출 경계까지 확인”으로 제한한다. 실행 불가능한 환경에서도 정적 추적은 가능하나 테스트 통과로 쓰지 않는다.
+If the whole repository was not inspected, limit conclusions to the files and call boundaries checked. Static tracing remains useful when execution is unavailable, but it is not a passed runtime test.

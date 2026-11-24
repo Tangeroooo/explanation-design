@@ -1,22 +1,22 @@
-# 그림 제작 명세
+# Figure production brief
 
-- ID / 제목:
-- 독자가 해결할 질문:
-- 한 문장 핵심 메시지:
-- 대상 독자 / 필요한 선행 개념:
-- source ID·위치·버전 / claim ID:
-- 시각 유형 / 문장·표보다 나은 이유:
-- 포함 요소 / 각 요소의 의미:
-- 관계 / 방향 / edge 라벨 / 관계별 근거:
-- 상태 / guard / 실행 순서 / 보장하지 않는 순서:
-- 사실·추론·제안·미확인 표현 (색 이외의 구분 포함):
-- 원본 수치 / 단위 / 계산 코드 (해당 시):
-- 정확한 라벨:
-- 캡션:
-- 생략·집계 / 해석에 미치는 영향:
-- 크기 / 세부 수준 / 이미 결정된 style:
-- 출력 형식:
-- 의미 수용 기준:
-- 시각 수용 기준:
-- 제작에 사용한 diagram-design 위치·버전 (제작 시 발견한 값):
-- 결과 / 검증 명령 / 실제 관찰 / 수정 / 미검증 범위:
+- ID / title:
+- Reader question to resolve:
+- One-sentence main message:
+- Audience / prerequisite concepts:
+- Source IDs, locations, and versions / claim IDs:
+- Visual type / why it helps more than prose or a table:
+- Included elements / meaning of each element:
+- Relationships / directions / edge labels / evidence for each relationship:
+- States / guards / execution order / order not guaranteed:
+- Treatment of facts, inferences, proposals, and unknowns (including distinctions beyond color):
+- Original numbers / units / calculation code, if applicable:
+- Exact labels:
+- Caption:
+- Omissions and aggregation / effects on interpretation:
+- Size / detail level / already agreed style:
+- Required output formats:
+- Semantic acceptance criteria:
+- Visual acceptance criteria:
+- diagram-design location and version discovered for production:
+- Result / verification commands / actual observations / corrections / unverified areas:

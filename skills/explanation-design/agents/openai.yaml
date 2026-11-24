@@ -1,4 +1,4 @@
 interface:
   display_name: "Explanation Design"
-  short_description: "근거에서 동작·조건·선택을 도출하고 독자가 판단할 수 있게 설명"
+  short_description: "Explain behavior, constraints, and choices from evidence"
   default_prompt: "Use $explanation-design to explain the supplied evidence, behavior, constraints, and choices for the intended reader."

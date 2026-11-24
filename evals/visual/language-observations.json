@@ -1,0 +1,42 @@
+[
+  {
+    "language": "en",
+    "pageOverflow": false,
+    "headings": [
+      "Tool scope",
+      "Claims and evidence",
+      "Sources"
+    ],
+    "width": 1440
+  },
+  {
+    "language": "en",
+    "pageOverflow": false,
+    "headings": [
+      "Tool scope",
+      "Claims and evidence",
+      "Sources"
+    ],
+    "width": 390
+  },
+  {
+    "language": "ko",
+    "pageOverflow": false,
+    "headings": [
+      "도구의 범위",
+      "주장과 근거",
+      "출처"
+    ],
+    "width": 1440
+  },
+  {
+    "language": "ko",
+    "pageOverflow": false,
+    "headings": [
+      "도구의 범위",
+      "주장과 근거",
+      "출처"
+    ],
+    "width": 390
+  }
+]
