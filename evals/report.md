@@ -89,3 +89,9 @@ catalog 경로가 실제 설치 위치와 달라 파일 검색으로 활성 설�
 - 전체 언어·runtime·plotting 도구·브라우저 조합을 검증하지 않았다. 기본 도구의 Python 최소 버전은 문법·API 기준이며 실제 실행 환경은 3.14였다.
 - SVG offline 폰트 대체, 실제 인쇄 페이지 배치, 의미 보존이 필요한 외부 편집 도구 import는 미검증이다.
 - future `cases.json`의 근거 충돌·자료 속 지시문 case는 미실행이며 후속 평가 입력으로 남긴다.
+
+## GitHub 게시와 원격 설치 확인
+
+구현 커밋 [ba484cf](https://github.com/Tangeroooo/explanation-design/commit/ba484cf5cc1714536e1c56d33ae35f34ccb99d41)를 `main`에 non-force push했다. API로 public 설정과 default branch를 다시 확인했다. 해당 커밋의 [GitHub Actions check](https://github.com/Tangeroooo/explanation-design/actions/runs/45359260602)는 **success**였다.
+
+게시 후 새 임시 프로젝트에서 `npx skills@1.9.0 add Tangeroooo/explanation-design --skill explanation-design --agent codex claude-code --yes --copy`를 실행했다. 원격 clone·단일 스킬 발견·양쪽 agent 설치 성공. 각 agent에 설치된 **20개 파일**의 SHA-256이 로컬 게시 원본과 모두 일치했다. 두 설치본의 package validator와 설치본 template을 이용한 assembler도 실제 실행해 통과했다. 사용자 global 설치·설정은 변경하지 않았다.
