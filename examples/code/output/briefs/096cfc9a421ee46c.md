@@ -1,0 +1,22 @@
+# F1 — send와 ack 실패의 차이
+
+- 질문: deliver가 실패했을 때 어디까지 실행되었는가?
+- 메시지: send 실패와 ack 실패는 같은 실행 상태가 아니며 외부 내구성은 별도 계약이다.
+- 독자: async 호출을 이해하는 엔지니어. 선행 개념: await·예외 전파.
+- 근거: S1 `input/worker.py:20–23`, 함수 deliver, 파일 hash는 document.json. C1–C4.
+- 유형/이유: flowchart. 호출 순서와 두 예외 분기를 한눈에 비교해야 하므로 표를 보완한다. semantic-patterns를 검토했으나 특정 pattern은 맞지 않아 직접 type 선택.
+- 요소: entry, await send, send exception, await ack, ack exception, return acked. 6 nodes / 5 edges.
+- 관계: entry→send, send 반환→ack, send 예외→전파/ack 미호출, ack 반환→acked, ack 예외→전파/send 반환. 모든 edge는 S1. 외부 부수 효과·재배달 연결은 추가하지 않음.
+- 상태/순서: 실제 코드의 호출·반환/예외 순서. 외부 commit·응답 보장은 표현하지 않음.
+- 상태 표현: 모든 실행 edge는 현재 구현의 사실. UNKNOWN 라벨은 외부 계약 미확인. 제안·추론 edge 없음.
+- 수치: 없음.
+- 정확한 라벨: HTML과 동일. RETURNS / RAISES는 await 호출의 반환/예외 의미.
+- 캡션: send 예외는 ack 미호출, ack 예외는 send 반환 이후다. 외부 효과와 내구성은 반환 여부만으로 확정할 수 없다.
+- 생략: broker 재배달·sink 저장·process crash·cancel. 제공되지 않은 외부 계약을 보장하지 않으며 본문에서 조건부 설명.
+- 크기: doc-wide, 1280×720, standard ramp. 한국어 node 12px 이상.
+- 스타일: 사용자 선택 diagram-design 기본 light. font source web, offline fallback 가능.
+- 형식: diagram HTML + 개별 SVG/PNG, 문서에는 글자 크기가 고정된 PNG로 포함.
+- 의미 수용: call order·두 오류 분기 보존, send 반환≠영속화·ack 반환≠전체 전달 보장, 근거 없는 retry edge 금지.
+- 시각 수용: 접근 가능한 title/desc, 잘림·겹침 없음, 직각/직선 connector, label-stroke 간격, 1 focal node, local horizontal scroll, print 전체 보임.
+- 제작 지침: 현재 설치본에서 발견한 diagram-design 2.6.174의 SKILL.md, type-flowchart, semantic-patterns, style-guide, output-spec, export를 실제로 읽음. 설치 절대 경로는 재사용 지침에 고정하지 않음.
+- 실제 결과/검증/수정: evals/report.md에 기록.

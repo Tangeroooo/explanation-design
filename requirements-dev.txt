@@ -1,0 +1,4 @@
+# Optional: chart regeneration, official skill validator, browser visual review.
+matplotlib>=3.9,<4
+PyYAML>=6,<7
+playwright>=1.50,<2

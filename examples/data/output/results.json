@@ -1,0 +1,48 @@
+{
+  "source_sha256": "a11e1ce3c92a31aaa32a4ce93fc2bea1abad830bff74315f321ccbdd80f4fe87",
+  "unit": "request error rate (%)",
+  "totals": {
+    "A": {
+      "requests": 1000,
+      "errors": 19,
+      "rate_pct": 1.9
+    },
+    "B": {
+      "requests": 1000,
+      "errors": 72,
+      "rate_pct": 7.2
+    }
+  },
+  "change_pp": 5.3,
+  "relative_change_pct": 278.94736842105266,
+  "cohorts": {
+    "heavy": {
+      "A": {
+        "requests": 100,
+        "errors": 10,
+        "rate_pct": 10.0,
+        "request_share_pct": 10.0
+      },
+      "B": {
+        "requests": 900,
+        "errors": 72,
+        "rate_pct": 8.0,
+        "request_share_pct": 90.0
+      }
+    },
+    "light": {
+      "A": {
+        "requests": 900,
+        "errors": 9,
+        "rate_pct": 1.0,
+        "request_share_pct": 90.0
+      },
+      "B": {
+        "requests": 100,
+        "errors": 0,
+        "rate_pct": 0.0,
+        "request_share_pct": 10.0
+      }
+    }
+  }
+}

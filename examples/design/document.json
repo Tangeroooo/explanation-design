@@ -1,0 +1,275 @@
+{
+  "title": "재시작 후 복구 가능한 집계 job 설계",
+  "language": "ko",
+  "summary": "현재는 DB job table에 접수를 commit하고 같은 배포 단위 worker가 복구·처리하는 방향을 권합니다. accepted 이후 복구 계약과 기존 DB 활용에 맞지만, atomic claim과 worker lifecycle은 확인이 필요합니다.",
+  "sources": [
+    {
+      "id": "S1",
+      "label": "합성 설계 요구사항",
+      "location": "requirements.md 전체",
+      "version": "sha256:134cdc022897a93e7666e919af46bfe696dfa8d283fb3b106f0596ce04fe8209",
+      "href": "input/requirements.md"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "text": "accepted 작업은 API 재시작 후에도 조회·복구되어야 하며 ID·상태 field는 유지한다.",
+      "kind": "fact",
+      "source_ids": [
+        "S1"
+      ],
+      "basis": "요구사항의 필수 계약이다. 현재 구현의 달성 상태를 뜻하지 않는다."
+    },
+    {
+      "id": "C2",
+      "text": "DB job table을 복구 기준으로 삼고 commit 확인 후 accepted를 응답한다.",
+      "kind": "proposal",
+      "source_ids": [
+        "S1"
+      ],
+      "basis": "기존 DB의 transaction·unique constraint가 확인되어 있고 별도 상시 service 운영을 피한다는 조건에 맞는다."
+    },
+    {
+      "id": "C3",
+      "text": "순수 process-local queue는 필수 복구 계약을 충족하지 못한다.",
+      "kind": "inference",
+      "source_ids": [
+        "S1"
+      ],
+      "basis": "메모리 기록만 사용하면 API process 재시작 때 복구할 durable 기록이 없다. 별도 durable source 추가 시 다른 대안이다."
+    },
+    {
+      "id": "C4",
+      "text": "결과 key의 unique constraint와 결과·완료 상태 transaction을 제안한다.",
+      "kind": "proposal",
+      "source_ids": [
+        "S1"
+      ],
+      "basis": "동일 DB에 결과를 두는 제안의 조건. 결과 store가 다르면 별도 복구 프로토콜 필요. 중복 계산은 허용한다."
+    },
+    {
+      "id": "C5",
+      "text": "DB claim/lease primitive, broker 보존/ack, workload는 미확인이다.",
+      "kind": "unknown",
+      "source_ids": [],
+      "basis": "요구사항이 명시한 조사 항목. 구현된 것처럼 flow에 표시하지 않는다."
+    }
+  ],
+  "sections": [
+    {
+      "id": "goals",
+      "heading": "목표와 유지할 계약",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "accepted는 작업 완료가 아닙니다. 응답한 job은 재시작 후 조회·복구되어야 하고, 같은 job ID의 최종 결과는 하나여야 합니다. 계산 자체의 중복은 허용합니다. public ID와 상태 field는 유지하고 내부 scheduling·storage table은 바꿀 수 있습니다. 실제 코드는 제공되지 않았으므로 아래 이름은 모두 제안입니다.",
+          "claim_ids": [
+            "C1"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "기존 외부 DB와 broker가 있고 작은 팀은 새 상시 service 운영을 피하려 합니다. 요청 수·실행 시간은 미측정이므로 임의 SLA·성능 점수는 만들지 않습니다.",
+          "claim_ids": [
+            "C5"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "options",
+      "heading": "세 대안의 같은 기준 비교",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "평가 축",
+            "Process-local queue",
+            "DB job table + 같은 배포 worker",
+            "기존 broker worker"
+          ],
+          "rows": [
+            [
+              "accepted 이후 복구",
+              "순수 메모리만으로 불충족",
+              "commit된 job을 복구 기준으로 설계 가능",
+              "publisher 확인·보존 계약 검증 필요"
+            ],
+            [
+              "최종 결과 한 개",
+              "queue 자체는 보장 없음",
+              "unique job ID와 저장 transaction 제안",
+              "broker와 별개로 unique 결과 저장 필요"
+            ],
+            [
+              "운영·자원",
+              "작지만 복구 조건 어김",
+              "기존 DB 사용, polling·복구·API 자원 경쟁 관리",
+              "기존 broker 사용, ack·적체·복구 운영 확인"
+            ],
+            [
+              "주요 edge case",
+              "API 종료 시 대기 작업 유실",
+              "claim 경쟁·lease 만료·stale worker·DB 장애",
+              "dual-write gap·재배달·응답 유실·보존 만료"
+            ],
+            [
+              "선택 조건",
+              "유실 허용 또는 별도 durable source",
+              "현재 계약·운영 조건의 우선 후보",
+              "계약 검증 후 burst 분리·독립 확장 필요 시"
+            ]
+          ],
+          "claim_ids": [
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "사용자가 지정한 local queue 후보는 제외하지 않고 필수 조건에 어긋나는 이유를 설명했습니다. broker는 확인되지 않은 계약 때문에 아직 추천하지 않은 것이며 부적합으로 확정하지 않습니다.",
+          "claim_ids": []
+        }
+      ]
+    },
+    {
+      "id": "flow",
+      "heading": "추천 설계의 data/control flow",
+      "blocks": [
+        {
+          "type": "code",
+          "language": "text",
+          "text": "접수: request → 기존 형식 job ID 결정 → DB transaction(job 생성)\n      → commit 성공 확인 → accepted + job ID\n실행: worker 시작/scan → 미완료 job 선택 → 안전한 claim [primitive 미확인]\n      → 외부 DB 읽기·집계 → unique 결과 저장 + 완료 상태 확정\n조회: 기존 상태 endpoint → 저장된 상태/결과 읽기"
+        },
+        {
+          "type": "paragraph",
+          "text": "접수와 실행은 분리합니다. local 알림을 추가해도 재시작 scan으로 미완료 job을 찾을 수 있어야 합니다. 같은 배포 단위라고 실행이 하나라고 가정하지 않습니다. rolling update에서 worker가 겹칠 수 있고 API와 CPU·connection pool을 경쟁할 수 있습니다.",
+          "claim_ids": [
+            "C2",
+            "C5"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "같은 DB의 results.job_id unique 제약과 결과·완료 상태 transaction을 제안합니다. 이는 중복 행을 막는 장치이지 중복 계산의 결과 값이 동일하다는 보장은 아닙니다. 다른 시점의 DB를 읽으면 결과가 달라질 수 있어 snapshot 기준·충돌 결과 채택 정책을 확인해야 합니다.",
+          "claim_ids": [
+            "C4"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "modules",
+      "heading": "변경 위치 제안",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "제안 위치",
+            "책임",
+            "검증할 계약"
+          ],
+          "rows": [
+            [
+              "api/jobs.create_job()",
+              "durable job commit 후 접수 응답",
+              "기존 ID·field, commit 응답 유실 처리"
+            ],
+            [
+              "storage/jobs.claim_job()",
+              "claim·재시작 복구 기준",
+              "조건부 갱신·lock·lease/fencing 실제 지원"
+            ],
+            [
+              "worker/run_job(), recover_jobs()",
+              "제한된 실행·scan·중지",
+              "동시 실행·취소·rolling update"
+            ],
+            [
+              "storage/results.store_once()",
+              "unique key·완료 상태 확정",
+              "같은 transaction 범위와 stale writer 방어"
+            ],
+            [
+              "DB migration",
+              "호환 schema·index 추가",
+              "구버전 공존·rollback 시 상태 해석"
+            ]
+          ],
+          "claim_ids": [
+            "C2",
+            "C4",
+            "C5"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "edges",
+      "heading": "Trade-off와 선택이 바뀌는 조건",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "commit은 성공했는데 응답만 유실되면 caller는 접수 여부를 모를 수 있습니다. accepted 이후 복구와 정확히 한 번 접수는 별개입니다. 기존 계약에 안정적인 retry key가 있는지 확인하고 임의 public field를 추가하지 않습니다.",
+          "claim_ids": [
+            "C1",
+            "C2"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "lease 만료 후 구 worker가 계속 실행되면 중복 계산과 상태 덮어쓰기가 가능합니다. unique 결과 key만으로 stale worker의 상태 변경을 막았다고 하지 않습니다. 구체 DB primitive와 결과 transaction 경계를 확인해야 합니다.",
+          "claim_ids": [
+            "C4",
+            "C5"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "broker publish 확인·보존·재배달·ack·운영이 확인되고 burst 흡수나 독립 확장이 필요하다고 측정되면 broker worker를 재평가합니다. 재시작 유실 허용 또는 별도 durable source가 생기면 local queue도 후보가 됩니다.",
+          "claim_ids": []
+        }
+      ]
+    },
+    {
+      "id": "rollout",
+      "heading": "적용 순서와 남은 확인",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "시점",
+            "적용",
+            "확인"
+          ],
+          "rows": [
+            [
+              "단기",
+              "public 계약·복구 수용 기준 고정, DB/broker 조사, workload 관측",
+              "atomic claim·결과 store·retry key·snapshot·worker lifecycle"
+            ],
+            [
+              "중기",
+              "최소 job table·unique result·호환 migration 구현",
+              "commit 직후 종료, 계산·저장 중 장애, 동일 ID 병렬, rolling update"
+            ],
+            [
+              "장기",
+              "실측 backlog·API 자원 경쟁에 따라 분리·broker 재평가",
+              "운영 복구 절차·지연 요구·migration/rollback"
+            ]
+          ],
+          "claim_ids": []
+        },
+        {
+          "type": "paragraph",
+          "text": "이 사례는 합성 요구사항에 대한 설계 도출입니다. DB·worker 코드 구현, integration, 성능·장애 검증을 수행한 것으로 표시하지 않습니다. 비교 표와 짧은 flow가 질문을 충분히 전달하므로 그림은 제작하지 않았습니다.",
+          "claim_ids": []
+        }
+      ]
+    }
+  ]
+}

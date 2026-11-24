@@ -1,0 +1,153 @@
+{
+  "source_sha256": {
+    "examples/code/input/worker.py": "347797feff39c532dbc7692a8f5ec147c28ed305c8f0ed685d5df595a6c2402e",
+    "examples/design/input/requirements.md": "134cdc022897a93e7666e919af46bfe696dfa8d283fb3b106f0596ce04fe8209",
+    "examples/data/input/cohorts.csv": "a11e1ce3c92a31aaa32a4ce93fc2bea1abad830bff74315f321ccbdd80f4fe87",
+    "examples/data/input/context.md": "e50a86c162dbd3bf42d7a80e5ec42cc0420a28bb4fdd62c26597f1b7dc919bc7"
+  },
+  "worker_cases": [
+    {
+      "sink_mode": "ok",
+      "broker_mode": "ok",
+      "retry": false,
+      "result": "acked",
+      "log": [
+        "send:called",
+        "send:effect",
+        "send:returned",
+        "ack:called",
+        "ack:effect",
+        "ack:returned"
+      ],
+      "fake_sink_effects": [
+        "job-1"
+      ],
+      "fake_broker_acks": [
+        "job-1"
+      ]
+    },
+    {
+      "sink_mode": "fail_before_effect",
+      "broker_mode": "ok",
+      "retry": false,
+      "result": "RuntimeError: send failed before fake effect",
+      "log": [
+        "send:called"
+      ],
+      "fake_sink_effects": [],
+      "fake_broker_acks": []
+    },
+    {
+      "sink_mode": "fail_after_effect",
+      "broker_mode": "ok",
+      "retry": false,
+      "result": "RuntimeError: send failed after fake effect",
+      "log": [
+        "send:called",
+        "send:effect"
+      ],
+      "fake_sink_effects": [
+        "job-1"
+      ],
+      "fake_broker_acks": []
+    },
+    {
+      "sink_mode": "ok",
+      "broker_mode": "fail_before_effect",
+      "retry": false,
+      "result": "RuntimeError: ack failed before fake effect",
+      "log": [
+        "send:called",
+        "send:effect",
+        "send:returned",
+        "ack:called"
+      ],
+      "fake_sink_effects": [
+        "job-1"
+      ],
+      "fake_broker_acks": []
+    },
+    {
+      "sink_mode": "ok",
+      "broker_mode": "fail_after_effect",
+      "retry": false,
+      "result": "RuntimeError: ack failed after fake effect",
+      "log": [
+        "send:called",
+        "send:effect",
+        "send:returned",
+        "ack:called",
+        "ack:effect"
+      ],
+      "fake_sink_effects": [
+        "job-1"
+      ],
+      "fake_broker_acks": [
+        "job-1"
+      ]
+    },
+    {
+      "sink_mode": "ok",
+      "broker_mode": "fail_before_effect",
+      "retry": true,
+      "result": "acked",
+      "log": [
+        "send:called",
+        "send:effect",
+        "send:returned",
+        "ack:called",
+        "send:called",
+        "send:effect",
+        "send:returned",
+        "ack:called",
+        "ack:effect",
+        "ack:returned"
+      ],
+      "fake_sink_effects": [
+        "job-1",
+        "job-1"
+      ],
+      "fake_broker_acks": [
+        "job-1"
+      ]
+    }
+  ],
+  "calculations": {
+    "A": {
+      "requests": 1000,
+      "errors": 19,
+      "rate_pct": "1.900",
+      "cohorts": {
+        "light": {
+          "rate_pct": "1.00",
+          "weight_pct": "90.0"
+        },
+        "heavy": {
+          "rate_pct": "10.0",
+          "weight_pct": "10.0"
+        }
+      }
+    },
+    "B": {
+      "requests": 1000,
+      "errors": 72,
+      "rate_pct": "7.200",
+      "cohorts": {
+        "light": {
+          "rate_pct": "0",
+          "weight_pct": "10.0"
+        },
+        "heavy": {
+          "rate_pct": "8.00",
+          "weight_pct": "90.0"
+        }
+      }
+    },
+    "change": {
+      "percentage_points": "5.300",
+      "relative_pct": "278.9473684210526315789473684",
+      "B_over_A": "3.789473684210526315789473684",
+      "B_standardized_to_A_weights_pct": "0.800"
+    }
+  }
+}

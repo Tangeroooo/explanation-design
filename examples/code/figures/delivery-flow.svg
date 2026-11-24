@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="delivery-flow-title delivery-flow-desc" id="delivery-flow-root">
+        <title id="delivery-flow-title">send와 ack 실패는 같은 상태가 아니다</title>
+        <desc id="delivery-flow-desc">deliver는 send가 반환한 뒤 ack를 호출하며 각 호출의 예외는 다른 실행 상태를 남긴다.</desc>
+        <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Serif:ital@0;1&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');
+      #delivery-flow-root { --color-paper:   #f5f5f5;
+      --color-ink:     #2d3142;
+      --color-muted:   #4f5d75;
+      --color-accent:  #bf4520;
+      --font-sans:     'Geist', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif', 'Noto Serif KR', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace; }
+      #delivery-flow-root { font-family: var(--font-sans); color: var(--color-ink); }
+      #delivery-flow-root .diagram-container { width: 100%; overflow-x: auto; }
+      #delivery-flow-root .node-name { font-family: 'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; font-size:12px; font-weight:600; fill:#2d3142; }
+      #delivery-flow-root .sub { font-family:'Geist Mono',ui-monospace,monospace; font-size:9px; fill:#4f5d75; }
+      #delivery-flow-root .edge-label { font-family:'Geist Mono',ui-monospace,monospace; font-size:8px; fill:#4f5d75; letter-spacing:.06em; }
+      @media print {
+#delivery-flow-root .diagram-container { overflow-x: visible; }
+}</style>
+          <marker id="delivery-flow-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="delivery-flow-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="delivery-flow-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+
+          <!-- OPTIONAL: dot-pattern background. Uncomment the <pattern> and the second <rect> below if you want the dotted paper look. -->
+          <!--
+          <pattern id="delivery-flow-dots" width="22" height="22" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.9" fill="rgba(45,49,66,0.10)"/>
+          </pattern>
+          -->
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+        <!-- <rect width="100%" height="100%" fill="url(#delivery-flow-dots)" opacity="0.55"/> -->
+
+
+        <!-- Observed call order only. No broker retry policy is drawn. -->
+        <g fill="none" stroke="#4f5d75" stroke-width="1.5" marker-end="url(#delivery-flow-arrow)">
+          <line x1="640" y1="128" x2="640" y2="200"/>
+          <line x1="640" y1="264" x2="640" y2="368"/>
+          <line x1="512" y1="232" x2="320" y2="232"/>
+          <line x1="640" y1="432" x2="640" y2="560"/>
+          <line x1="768" y1="400" x2="928" y2="400"/>
+        </g>
+        <g class="edge-label" text-anchor="middle">
+          <rect x="648" y="304" width="64" height="16" fill="#f5f5f5"/><text x="680" y="316">RETURNS</text>
+          <rect x="380" y="208" width="72" height="16" fill="#f5f5f5"/><text x="416" y="220">RAISES</text>
+          <rect x="648" y="488" width="64" height="16" fill="#f5f5f5"/><text x="680" y="500">RETURNS</text>
+          <rect x="812" y="376" width="72" height="16" fill="#f5f5f5"/><text x="848" y="388">RAISES</text>
+        </g>
+        <g>
+          <rect x="512" y="80" width="256" height="48" rx="20" fill="#ececec" stroke="#4f5d75"/>
+          <text x="640" y="108" class="node-name" text-anchor="middle">deliver(message, sink, broker)</text>
+        </g>
+        <g>
+          <rect x="512" y="200" width="256" height="64" rx="6" fill="#ffffff" stroke="#2d3142"/>
+          <text x="640" y="228" class="node-name" text-anchor="middle">await sink.send(message)</text>
+          <text x="640" y="248" class="sub" text-anchor="middle">worker.py:21</text>
+        </g>
+        <g>
+          <rect x="80" y="208" width="240" height="48" rx="20" fill="#ececec" stroke="#4f5d75"/>
+          <text x="200" y="228" class="node-name" text-anchor="middle">예외 전파 · ack 미호출</text>
+          <text x="200" y="248" class="sub" text-anchor="middle">send effect: UNKNOWN</text>
+        </g>
+        <g>
+          <rect x="512" y="368" width="256" height="64" rx="6" fill="#ffffff" stroke="#2d3142"/>
+          <text x="640" y="396" class="node-name" text-anchor="middle">await broker.ack(message.id)</text>
+          <text x="640" y="416" class="sub" text-anchor="middle">worker.py:22</text>
+        </g>
+        <g>
+          <rect x="928" y="376" width="272" height="48" rx="20" fill="#f5e7e2" stroke="#bf4520"/>
+          <text x="1064" y="396" class="node-name" text-anchor="middle">예외 전파 · send는 반환함</text>
+          <text x="1064" y="416" class="sub" text-anchor="middle">durability / broker state: UNKNOWN</text>
+        </g>
+        <g>
+          <rect x="512" y="560" width="256" height="48" rx="20" fill="#ececec" stroke="#4f5d75"/>
+          <text x="640" y="588" class="node-name" text-anchor="middle">return "acked"</text>
+        </g>
+        <line x1="40" y1="660" x2="1240" y2="660" stroke="#bfc0c0"/>
+        <text x="40" y="688" class="sub">Solid arrows: call / return order in current code. C1–C4 · source S1 · external contracts not supplied.</text>
+
+
+      </svg>

@@ -1,0 +1,5 @@
+variant,cohort,requests,errors
+A,light,900,9
+A,heavy,100,10
+B,light,100,0
+B,heavy,900,72
