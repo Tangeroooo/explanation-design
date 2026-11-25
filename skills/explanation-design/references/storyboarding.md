@@ -16,6 +16,8 @@ A module inventory cannot replace this explanation. Introduce why a figure matte
 
 For an unfamiliar system, establish a compact structural map before tracing scenarios. Expand a named component, object, boundary, or edge from that map when the next question needs it. Keep names and visual roles recognizable across views; remind the reader which part is being expanded. A flow can revisit only the relevant part of an earlier structure instead of repeating the whole map. Keep runtime roles distinct from source modules and deployment instances.
 
+Detail views must preserve the meaning of the overview, not just its colors. Map an overview element to its detailed instances or subparts, and an overview edge to the path it summarizes. Mark newly exposed paths as previously omitted and identify a switch from logical roles to deployment instances or source modules. Reuse a concrete object or request to make the correspondence traceable. If the detailed evidence contradicts an overview guarantee, correct the overview rather than explaining away the mismatch.
+
 Use purpose, structure, behavior, and failure conditions as an internal coverage check, not mandatory headings or a quota of four figures per feature. An API-name match or a minimum paragraph length does not establish coverage: the reader must be able to trace the relevant behavior. When feedback exposes a class of defect, check the same class across the requested scope, including figures, rather than fixing only the example named by the reader.
 
 When shortening a draft, remove repetition and background first. Preserve errors, constraints, and uncertainty that could change the conclusion. Merge or delete paragraphs that answer no new question.

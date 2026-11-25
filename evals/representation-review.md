@@ -49,3 +49,46 @@ The revised instructions support distinct representations for independent ranges
 This is a semantic review of proposed briefs. No new figure was rendered, no diagram-design export was run, and no independent before/after quality measurement was performed. Run those checks on actual figure-producing tasks before claiming improved visual output. Repository structural/tooling checks are recorded separately by `scripts/check.py`.
 
 Validation run for this change: `python3 scripts/check.py` passed package and example structure checks and all 14 existing tooling/behavior tests. `git diff --check` passed. Those checks do not evaluate the new prose's explanatory or visual quality.
+
+## Follow-up: changed-condition review
+
+The added cases in [cases.json](cases.json) use [explicit synthetic assumptions](transfer/input/scenarios.md). Each request asks for an explanation and a figure brief followed by condition changes. Criteria are for the evaluator, not part of an independent agent's request. The following is author self-review against the supplied assumptions, not an independent run or a test with human readers.
+
+### Publication: existence, visibility, and uncertainty
+
+**Explanation.** Complete remote files make a candidate available to storage operations. Readers select it only after its catalog pointer is published. The publication boundary therefore separates remote existence from reader visibility. In the specified model, publishing a pointer before its target is ready permits an immediate reader to follow it to an incomplete or missing target. This is a consequence of the supplied assumptions, not an observed incident or a claim about designer motivation. A sequence brief should carry one candidate version through files, pointer publication, and local cleanup, and mark the publication boundary explicitly.
+
+| Changed condition | Prediction and supporting assumption |
+|---|---|
+| Upload succeeds, then a definitive publish conflict | This candidate is not selected; its complete files remain unreferenced. Another writer may have published something else, so “the global pointer did not change” would be an unsupported answer. |
+| Publish succeeds, then local cleanup fails | Candidate visibility remains; local temporary files also remain. Cleanup failure does not undo publication. |
+| Publication response is lost | Candidate publication is unknown. The writer's observation is insufficient; neither “unpublished” nor “safely retryable” follows. |
+
+**Review finding.** A generic “publish failure” branch would conflate the first and third outcomes. The explanation and brief must preserve definitive conflict versus lost response, not fix the distinction only in the answer key.
+
+### Ownership: preserve the overview while expanding it
+
+**Explanation.** S is a logical role realized by P and Q, not a third process. Its overview update edge expands into each process's helper call and selected catalog key. Each detailed process contains one coordinator, repeated worker/mailbox pairs, and one pool outside the worker boundaries. Normally P selects `record:P` and Q selects `record:Q`. Shared source code does not imply a shared target record.
+
+| Changed condition | Prediction and supporting assumption |
+|---|---|
+| P gains a fourth worker | P's worker count changes; its pool count stays one. Q still has three workers and one separate pool. |
+| Q passes `P` instead of `Q` | Q now selects `record:P`, the same target P selects. The final value and update order remain unknown because the fixture specifies neither. |
+
+**Review finding.** Repeating the pool inside each worker or treating S as an additional deployed process would contradict the overview-to-detail mapping. Matching colors alone would not catch either error.
+
+### Resource limits: distinguish constraints from policy
+
+**Explanation.** H and B separately bound C and W; T additionally bounds their sum. T is not another allocated region. Pressure classifies a separately measured working set and does not supply a request-handling policy. A brief should use aligned budget-limit tracks and a distinct pressure track, with illustrative GiB units and the three inequalities visible.
+
+| Changed condition | Prediction and supporting assumption |
+|---|---|
+| C = 8, W = 5, T = 12 | Individual checks pass, but 8 + 5 = 13 exceeds T. |
+| Only T changes to 13 | All budget checks pass, since equality is allowed; the pressure class cannot be inferred from those counters. |
+| Separately, S = 15.2 | 15.2 / 16 = 95%, so pressure is Emergency. Request rejection remains unknown because no policy is specified. |
+
+**Review finding.** A diagram that makes T a third allocation or equates working set with C + W changes the model. Classifying pressure correctly still does not establish what the system does in response.
+
+These reviews cover changed, unchanged, and unknown outcomes. They exercise reasoning from the supplied models and the proposed briefs; they do not establish rendered legibility or measured improvement in reader comprehension. The new cases have not been independently executed.
+
+Follow-up validation: `python3 scripts/check.py` again passed package/example checks and all 14 existing tests; skill-creator `quick_validate.py` and `git diff --check` passed. All nine evaluation cases were checked for unique IDs, nonempty requests/criteria, and existing input/context paths. The three new cases received the author review recorded above, not automated comprehension testing.

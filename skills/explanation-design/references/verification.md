@@ -33,6 +33,10 @@ Use hashes or regeneration comparisons when stale outputs are a realistic risk. 
 
 ## Record execution and corrections
 
+For a substantial explanation, return to the reader's target task and test a small change in condition. Hold other assumptions fixed: move a failure across a publication boundary, change the instance ID passed to a shared helper, or alter usage without changing resource limits. Derive the outcome from the explanation and check it against the source. Include a case where the result stays the same or becomes unknown when that distinction matters. If answering requires an unstated rule, repair the explanation rather than adding that rule only to the answer key. Keep this proportional to the task; do not turn every short answer into a quiz for the user.
+
+Record the changed condition, predicted result or unknown, evidence, and any correction. Author self-review, an independent agent's task performance, and an actual reader's comprehension are different kinds of evidence; do not report one as another. Keep evaluator answers and criteria out of independent evaluation prompts.
+
 Solve realistic inputs and evaluate actual outcomes. Matching expected wording with regexes is not behavioral evaluation. Check different request types such as code, design, and data. Record each defect, its cause, and the correction, then rerun the affected case. Ensure the correction generalizes rather than accumulating example-specific rules.
 
 If no visual result was opened, mark it visually unverified. When browser/export tools are unavailable, finish structural and semantic checks and state the actual limits. Syntax checks do not establish explanation or visual quality. For independent evaluation, preserve its inputs, independence, scope, and actual artifacts.
