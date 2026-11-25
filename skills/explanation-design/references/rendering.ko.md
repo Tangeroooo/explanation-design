@@ -3,11 +3,11 @@
 ## diagram-design 호출 경계
 
 1. 현재 session의 skill catalog에서 `diagram-design` 위치를 찾는다. 경로가 사라졌으면 알려진 skill/plugin roots에서 `rg --files --hidden … -g SKILL.md`로 발견한다. 버전·홈 디렉터리를 스킬에 고정하지 않는다. 여러 설치가 있으면 활성 catalog와 일치하는 것을 우선하고 모호함을 기록한다.
-2. 실제 `SKILL.md`, 선택한 type reference, 필요한 style·export·검증 지침을 읽는다. 스타일·크기·출력 선택에 이미 있는 사용자 결정을 전달한다. 제작 도구의 지침을 기억으로 대체하지 않는다.
-3. [그림 명세](../assets/figure-brief.ko.md)를 전달한다. 질문·메시지·대상·출처·claim·node/edge·상태·정확한 라벨·생략·size·style·format·수용 기준을 포함한다. 사실/추론/제안/미확인의 시각 표현은 명세에서 합의한다.
+2. 실제 `SKILL.md`, 선택한 type reference, 필요한 style·export·검증 지침을 읽는다. 제작자의 기본 스타일과 온보딩 대신 선택된 [다이어그램 테마](diagram-theme.ko.md)와 확인 대기 생략 지침을 적용한다. 사용자가 명시한 변경·크기·출력 결정을 전달한다. 제작 도구의 지침을 기억으로 대체하지 않는다.
+3. [그림 명세](../assets/figure-brief.ko.md)를 전달한다. 질문·메시지·대상·출처·claim·node/edge·상태·정확한 라벨·생략·size·고정 팔레트와 Noto Sans KR 요건·format·수용 기준을 포함한다. 사실/추론/제안/미확인의 시각 표현은 명세에서 합의한다.
 4. 해당 환경에서 skill을 적용해 제작하고 제작본과 검증 결과를 회수한다. skill은 agent 지침일 수 있으며 별도 rendering API가 있다고 가정하지 않는다. 실제 제작·검증·export가 없으면 “연계 완료”라고 쓰지 않는다.
 5. 결과를 의미적으로 대조한다. 특히 화살표 방향·guard·수치·순서·실패 후 상태를 확인한다. 누락이 해석을 바꾸면 그림 또는 명세를 수정하고 다시 검증한다.
-6. SVG/PNG가 요청되면 설치된 skill의 export helper를 사용한다. 파일 이름·출력 형식·미검증 범위를 보고한다.
+6. SVG/PNG가 요청되면 설치된 skill의 export helper를 사용하고 테마 reference에 따라 실제 출력의 폰트와 팔레트를 검증한다. 파일 이름·출력 형식·미검증 범위를 보고한다.
 
 diagram-design이 없거나 도구가 작동하지 않으면 가능한 설명·표·명세를 완료한다. 요청한 그림의 미제작 상태를 표시하고 필요한 설치·실행을 안내한다. 제작기를 복제하거나 성공으로 가장하지 않는다. 정확한 수치 차트는 [data](data.ko.md)의 plotting 경로를 쓴다.
 
