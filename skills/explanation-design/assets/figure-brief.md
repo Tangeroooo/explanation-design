@@ -19,7 +19,7 @@
 - Concrete example to trace / illustrative values / boundaries and distinctions that must survive abstraction:
 - Comparison, if any: shared baseline / what changes / unchanged context to mute:
 - Size / detail level:
-- Selected style: [fixed role palette](../references/diagram-theme.md), Noto Sans KR throughout; no theme/profile questions or pre-drawing approval pause. Record any explicit user override:
+- Selected style: [fixed role palette](../references/diagram-theme.md), Noto Sans KR for explanatory text; record a monospace family for code/literal identifiers; no theme/profile questions or pre-drawing approval pause. Record any explicit user override:
 - Font loading / actual rendered font and glyph verification / portable export treatment:
 - Required output formats:
 - Semantic acceptance criteria / changed-condition question / expected outcome or explicit unknown and supporting evidence:

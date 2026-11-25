@@ -64,11 +64,11 @@ Respond in the user's language. There is no fixed number of sections, figures, o
 
 ## Responsibilities with diagram-design
 
-explanation-design owns evidence investigation, claims, explanation order, representation choice, figure briefs, semantic verification, and document assembly. New diagrams use the fixed [light role palette and Noto Sans KR](skills/explanation-design/references/diagram-theme.md), with no theme/profile questions or pre-drawing approval pause. For diagram layout, applying these style tokens, visual verification, and SVG/PNG export, read and apply the **separately installed diagram-design** skill. Do not hardcode its path or version or duplicate its renderer.
+explanation-design owns evidence investigation, claims, explanation order, representation choice, figure briefs, semantic verification, and document assembly. New diagrams use the fixed [light role palette with Noto Sans KR for explanation and monospace for code](skills/explanation-design/references/diagram-theme.md), with no theme/profile questions or pre-drawing approval pause. For diagram layout, applying these style tokens, visual verification, and SVG/PNG export, read and apply the **separately installed diagram-design** skill. Do not hardcode its path or version or duplicate its renderer.
 
 If diagram-design is unavailable, complete the explanation, tables, and brief and mark requested figures unproduced. Short explanations without diagrams do not require it. Exact quantitative charts use original data and standard plotting tools such as Matplotlib, not image-generation models.
 
-The linked rendering examples predate the fixed theme and remain historical integration evidence; they do not demonstrate the new palette or uniform Noto Sans KR typography.
+The linked rendering examples predate the fixed theme and remain historical integration evidence; they do not demonstrate the new palette or prose/code typography rules.
 
 Actual integration example: [production brief](examples/code/figures/brief.md) → [diagram HTML](examples/code/figures/delivery-flow.html) → [SVG](examples/code/figures/delivery-flow.svg) / [PNG](examples/code/figures/delivery-flow.png) → [assembled explanation HTML](examples/code/output/index.html).
 

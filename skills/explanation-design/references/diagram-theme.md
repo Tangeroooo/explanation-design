@@ -5,7 +5,7 @@ Use this light, role-based palette for new figures. It carries forward the refer
 ## Proceed without style questions
 
 - Do not ask the user to choose a theme, supply a brand URL or tokens, keep defaults, load/save a profile, or approve a style preview. Do not wait for confirmation of diagram type, size, or the rendering plan; choose from the reader's question and intended display size, state consequential assumptions, and proceed.
-- Pass this reference as the selected style and standing instruction to `diagram-design`. It replaces the producer's default palette, mixed font families, style-onboarding gate, profile-save offers, and pre-drawing confirmation pause. Continue to use its layout, export, and verification guidance.
+- Pass this reference as the selected style and standing instruction to `diagram-design`. It replaces the producer's default palette and prose typography, style-onboarding gate, profile-save offers, and pre-drawing confirmation pause. Continue to use its layout, export, and verification guidance.
 - Apply tokens to the current artifact or a task-local template. Do not edit a shared skill installation or global profile to satisfy its onboarding gate. A discovered saved profile must not silently replace this theme.
 - Ask only when missing content, evidence, or an output constraint materially blocks a correct result; do not turn routine visual choices into questions.
 
@@ -38,6 +38,12 @@ Use only the roles needed by the explanation, not every swatch in every figure. 
 
 ## Typography and export
 
-Use **Noto Sans KR** for all visible diagram text: titles, node names, identifiers, edge labels, legends, and captions, in both Korean and Latin scripts. Use weight and size for hierarchy (regular 400, emphasis 700), not different font families. Set `font-family: "Noto Sans KR", sans-serif` in HTML/SVG and the equivalent actual font in plotting tools. The fallback is for resilience, not evidence that the requested font rendered.
+Choose fonts by text function, not by whether the text is Korean or English.
 
-Load the font before measuring labels, laying out, or exporting; measure and wrap with the same font and weight used in the output. Inspect actual rendered fonts and Korean/Latin glyphs rather than accepting a CSS declaration alone. For portable SVG/HTML, embed or package the font as permitted by the output format and license; keep editable text sources when outlining glyphs. For PNG, verify the font before rasterization. If font loading or embedding fails, report that limitation and do not claim font verification passed or silently substitute the producer's default fonts.
+- **Explanatory text:** use **Noto Sans KR** for titles, prose, ordinary component names, edge descriptions, legends, and captions in either language. Use weight and size for hierarchy (regular 400, emphasis 700). Set `font-family: "Noto Sans KR", sans-serif` in HTML/SVG and the equivalent actual font in plotting tools.
+- **Code and literal technical tokens:** use a consistent, available **monospace** font for code blocks, inline code, variable/function/type names, commands, paths, and literal values. Preserve an appropriate project/producer code font; otherwise choose an available monospace font without asking a theme question. Record the family in the brief. Do not replace it with Noto Sans KR or reject it as a theme violation.
+- **Mixed labels:** apply monospace only to the literal token; retain Noto Sans KR for surrounding explanation. For example, “Worker pool” is an ordinary component label, while `worker_pool.acquire()` is code. Keep code spelling intact and verify glyph coverage, including Korean comments where present.
+
+A fallback stack is for resilience, not evidence that the intended fonts rendered.
+
+Load both prose and code fonts before measuring labels, laying out, or exporting; measure and wrap each text run with the font and weight actually used in the output. Inspect actual rendered fonts and Korean/Latin glyphs rather than accepting a CSS declaration alone. For portable SVG/HTML, embed or package the font as permitted by the output format and license; keep editable text sources when outlining glyphs. For PNG, verify the font before rasterization. If font loading or embedding fails, report that limitation and do not claim font verification passed or silently substitute fonts across prose and code roles.
