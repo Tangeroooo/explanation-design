@@ -1,12 +1,14 @@
 # Figure production brief
 
 - ID / title:
-- Reader question to resolve:
+- Reader question / concrete tracing, comparison, prediction, or decision the figure should enable:
 - One-sentence main message:
 - Audience / prerequisite concepts:
 - Source IDs, locations, and versions / claim IDs:
 - Visual type / why it helps more than prose or a table:
+- Parent view / correspondence from its elements and edges to this view / aggregation, added detail, or perspective change:
 - Included elements / meaning of each element:
+- Visual vocabulary: color roles, shapes, enclosure, positions/axes, line styles, size / non-color cues:
 - Relationships / directions / edge labels / evidence for each relationship:
 - States / guards / execution order / order not guaranteed:
 - Treatment of facts, inferences, proposals, and unknowns (including distinctions beyond color):
@@ -14,9 +16,12 @@
 - Exact labels:
 - Caption:
 - Omissions and aggregation / effects on interpretation:
+- Concrete example to trace / illustrative values / boundaries and distinctions that must survive abstraction:
+- Comparison, if any: shared baseline / what changes / unchanged context to mute:
 - Size / detail level / already agreed style:
 - Required output formats:
-- Semantic acceptance criteria:
+- Semantic acceptance criteria / changed-condition question / expected outcome or explicit unknown and supporting evidence:
 - Visual acceptance criteria:
+- Authoritative figure source / generated assets to refresh when claims change / published view to verify, if applicable:
 - diagram-design location and version discovered for production:
 - Result / verification commands / actual observations / corrections / unverified areas:
