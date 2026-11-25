@@ -1,0 +1,126 @@
+{
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "<diagram-design>/scripts/self_check.py",
+        "examples/architecture/structure.html",
+        "examples/architecture/keys.html"
+      ],
+      "exit_code": 1,
+      "stdout": "FAIL examples/architecture/structure.html\n  - non-fragment CSS url() is not allowed\n  - non-fragment CSS url() is not allowed\nFAIL examples/architecture/keys.html\n  - non-fragment CSS url() is not allowed\n  - non-fragment CSS url() is not allowed\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "<diagram-design>/scripts/verify_geometry.py",
+        "examples/architecture/structure.html",
+        "examples/architecture/keys.html"
+      ],
+      "exit_code": 0,
+      "stdout": "Summary: 2 file(s) checked, 0 finding(s).\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "skills/explanation-design/scripts/assemble.py",
+        "examples/architecture/document.json",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "Structure valid\n",
+      "stderr": ""
+    }
+  ],
+  "sha256": {
+    "system.md": "709fc023e90f06a1172d33a42b19e640b54c1a0a942be067edf251939eaea0d1",
+    "brief.md": "23f126012b9a69af3a21f47434613ccef6685c8bbd917a100b118e445c3e8efe",
+    "make_sources.py": "d4cbb96eeb67223f65306b2a50f9b3117fe17e83e95c4de60c473bb33316294e",
+    "structure.html": "296ba084957d0a1cd64166fd64f32b1dd7c3cb67b966313d75c5d6c365aae355",
+    "structure.svg": "bbd23432761326570cf1e16bdf89dd4535818a0f2ce62be0da4122e88d25258b",
+    "structure.png": "974767139ea9c1846c765277400249d05b305faf3b11e9ec7c849ce23db71c1b",
+    "keys.html": "1e8f46b613ca3540be4d2bbeb6260d5d2c94a912d36477ed908a33c1f538b753",
+    "keys.svg": "010f9ee117aa8541d913b67920020af18b0f637a18b55793ee1cfae93ae28a07",
+    "keys.png": "4a0ff297cffab30dfc144d3f750f23631147f399db81c2334feb81e7cb58cf7f",
+    "document.json": "71678c4d2142d44d3d550495d9485d6019fd06cd8b398e4d272c45712d221f17",
+    "document/index.html": "5e0db9e756799ea327fbf4661ba8f4f5e7853b7a633cce589e9c65044624e040",
+    "render-observations.json": "d7bd3c8f6a4f26e91d28bf6d6c9c8f073181f6fb4a33e33f7d51742dea3bdb76",
+    "review-phase1.md": "2b189cb494565c4618f369f633a3e783c0d4d14fbf4fb7b8a1db0600806b1f1f",
+    "review.md": "c0a542f7edecad14c95d8454ee85925e864b43ff0ef746bb528ab929b6efeb57",
+    "inspect_render.py": "483795fb18a3d440690cd5ce269903ab2a41c041491924571a7f09697e0d6f62"
+  },
+  "display_strokes_css_px": {
+    "boundary": [
+      1.5,
+      2
+    ],
+    "main_arrow": 2.5,
+    "proposal": 3
+  },
+  "font_variable": {
+    "family": "Noto Sans KR",
+    "CDP_name": "Noto Sans KR Thin",
+    "wght": [
+      100,
+      100,
+      900
+    ],
+    "font_face_weight": "100 900",
+    "title_computed_weight": 700,
+    "per_glyph_axis_independently_verified": false
+  },
+  "visual": {
+    "opened": [
+      "preview/structure.png",
+      "preview/keys.png",
+      "structure.png",
+      "keys.png",
+      "preview/document.png"
+    ],
+    "final_document_korean_glyphs": "verified visually after local font packaging",
+    "overlap_clipping": "none observed in final diagrams",
+    "crossing_routes": "none; distinct record:P endpoints",
+    "geometry_findings": 0
+  },
+  "changed_conditions": [
+    {
+      "condition": "P workers 3 to 4 only",
+      "result": "one additional P mailbox; P pool count 1; Q unchanged; normal keys unchanged",
+      "basis": "S1 items 2,3,5"
+    },
+    {
+      "condition": "Q supplies P",
+      "result": "same record:P target; final value unknown",
+      "basis": "S1 items 3,4,5"
+    }
+  ],
+  "review": {
+    "reviewers": 1,
+    "fresh_context": true,
+    "stages": 2,
+    "correction_rechecks": 1,
+    "accepted_new_findings": [
+      "F01"
+    ],
+    "rejected_findings": [],
+    "remaining_blockers": 0,
+    "limits": [
+      "V01 font data URL self_check failure",
+      "V02 variable font axis verification scope"
+    ]
+  },
+  "unverified": [
+    "actual production/runtime/performance/concurrency",
+    "non-Chromium and SVG editing applications",
+    "actual human comprehension",
+    "independent per-glyph font weight axis"
+  ],
+  "author_corrections": [
+    "Document assembler default system font lacked Korean glyphs; added packaged font through finalize_document.py and inspected final screenshot.",
+    "Document width increased to fit 1280px diagrams at a wide viewport; narrow displays retain local scrolling."
+  ],
+  "portable_assets": "all font data embedded; licenses in fonts/; no external uploads",
+  "portable_recheck": "Repository copy: source/document regeneration was byte-identical; Chromium render assertions rerun, including actual title weight and computed strokes. Earlier independent review is unchanged. Generated whitespace normalized in the source generator; SVG/PNG and document regenerated together. License text content preserved with trailing spaces removed."
+}

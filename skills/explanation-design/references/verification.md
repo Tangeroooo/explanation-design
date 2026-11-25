@@ -38,6 +38,8 @@ When delegation is permitted, use the available agent mechanism with fresh conte
 
 Preserve the first interpretation, evidence handoff, findings/dispositions, reviewed artifact versions, round count, and remaining limits with the task's verification record. Separate mechanical checks, independent review, and actual reader comprehension. For a trial, record accepted defects beyond the producer's prior checks, rejected findings, review effort, and regressions when observed; do not claim improvement from reviewer agreement alone. Do not add themes, profile-save questions, or routine approval pauses through the review loop.
 
+For structure/design requests, explicitly test whether a component view exposes responsibilities, interfaces, ownership, and shared resources. Flag a sequence-only answer when it omits these requested relationships, not merely because it uses sequence. Check that different shapes communicate evidenced differences rather than decoration. Inspect title weight, effective connector/boundary widths, raster density, and the final embed at the intended size against the theme. A 2× export with tiny displayed text or hairline edges still fails readability.
+
 ## Keep corrections connected to delivered artifacts
 
 When a claim or term changes, follow it through prose/table → authoritative figure source or generator → SVG/PNG/export → document reference → published bytes or view, where applicable. Edit the source and regenerate its outputs; do not leave a hand-patched generated file that will revert on the next run. Search all affected representations for the retired claim and review replacements in context: one vague word may have referred to different concepts.

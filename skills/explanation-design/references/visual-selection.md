@@ -20,6 +20,25 @@ Set one question and one-sentence message for each figure. Use the [figure brief
 
 If removing a figure loses no understanding, do not create it. A figure adds no evidence by itself. Semantic verification remains explanation-design's responsibility after production.
 
+## Structure is not a sequence of steps
+
+For architecture, module boundaries, resource sharing, and proposed designs, default to a **component view**: persistent components, interfaces/ports, owned state, shared resources, and their relationships within meaningful boundaries. Lay out peers and containment spatially; do not turn each component into a numbered execution step. A horizontal chain of boxes is still a flowchart if it hides those relationships.
+
+Before choosing sequence or flowchart, ask internally whether the question is primarily **what exists and connects**, **what happens in order**, or **what changes state**. Use a component view for the first, sequence for actor interaction order, and flowchart/state view for decisions or transitions. If structure and behavior both matter, show the structural map first and trace one path through it or add a focused sequence with the same identities. Do not make every section another sequence, but do not force extra diagram types merely for variety.
+
+Choose shapes deliberately in the brief. Useful structural encodings include:
+
+| Meaning supported by evidence | Shape or arrangement |
+|---|---|
+| Component with responsibility and interface | Named compartment with a short responsibility and labeled ports |
+| Process/module ownership | Nested boundary; clearly labeled boundary type |
+| Per-worker mailbox and one shared pool | Repeated worker/mailbox units; pool outside worker boundaries but inside its actual owner |
+| Queue or append-only log | Ordered slots/tape; endpoints labeled for enqueue/dequeue or append/read |
+| Stored object, file, or index | Cylinder, folded sheet, or content grid/tree as appropriate to the known structure |
+| Independent partitions or mapped ranges | Aligned bands with visible boundaries and mapping links |
+
+These are semantic choices, not an icon quota. Plain compartments remain appropriate for ordinary components. Do not invent storage, replication, persistence, or deployment facts to justify a glyph. For proposed designs, label proposed boundaries separately from observed implementation.
+
 ## Choose geometry from the relationship
 
 Choose what the reader needs to see before choosing a tool or template. Rectangles are useful for boundaries and states; the failure is putting prose in boxes without encoding a relationship.

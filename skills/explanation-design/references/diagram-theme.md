@@ -36,6 +36,27 @@ Use this light, role-based palette for new figures. It carries forward the refer
 
 Use only the roles needed by the explanation, not every swatch in every figure. For another domain, assign this same palette to a small set of named roles in the brief and keep that mapping across views. Color encodes role identity; stronger outlines or local emphasis direct attention. Do not recolor a whole role merely to meet an accent-node quota. Keep text in Ink unless the actual contrast has been checked. Failure and metadata must also differ by label, symbol, or line style; color alone cannot distinguish them. Preserve shapes and geometry suited to each concept rather than making every object a colored box.
 
+## Visible weight and resolution
+
+Use these defaults **at the intended display size**, overriding thinner producer-template defaults. They are CSS-pixel targets, not PNG pixel counts or unscaled SVG units.
+
+| Element | Default |
+|---|---|
+| Figure title | 28–32px, weight **700**, Ink |
+| Component/section heading | 16–18px, weight **700** |
+| Primary relationship/connector | **2–2.5px** stroke |
+| Meaningful component/ownership boundary, secondary connector | **1.5–2px** stroke |
+| Focused relationship or changed boundary | **3px** stroke, used sparingly |
+| Nonessential grid/separator | 0.75–1px; never the sole carrier of a relationship |
+
+Keep arrowheads, dash spacing, ports, and label clearances proportional to the stronger lines. Do not express uncertainty by making an essential edge nearly invisible; use a labeled/dashed edge of readable weight. Preserve role colors and visual hierarchy rather than making all edges equally heavy.
+
+For a uniformly scaled SVG without non-scaling strokes, `displayed_stroke = source_stroke × displayed_width / viewBox_width`. Apply the same scale reasoning to text. Prefer designing at the intended CSS dimensions; if the embed is smaller, adjust the source or layout and verify again. A large viewBox or a sharper PNG does not fix thin strokes or tiny text after downscaling.
+
+Preserve a vector SVG when the destination supports it. For PNG, rasterize from the vector/HTML at **2× the intended display width and height** by default (for example, a 1200×800 display uses a 2400×1600 PNG). Set the embed/display width explicitly; with `assemble.py`, use the figure's `display_width` so high-resolution pixels do not double its layout size. Do not enlarge an existing low-resolution bitmap. Higher export scale improves sampling, not the intended visual weight.
+
+Inspect the final embed at its actual size and the exported pixels. Record viewBox/layout size, display size, raster dimensions, and export scale. Distinguish thin source strokes, excessive downscaling, insufficient raster density, and upload/viewer resampling before choosing a fix. If a small viewport cannot preserve readable labels and lines, simplify/split or provide local scrolling rather than shrinking the entire structure into a thumbnail. Do not claim the user's original image had a resolution problem without inspecting it.
+
 ## Typography and export
 
 Choose fonts by text function, not by whether the text is Korean or English.

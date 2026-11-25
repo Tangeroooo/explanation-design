@@ -11,6 +11,8 @@
 
 각 대안은 `module/API 변화 → 상태·data/control flow → 얻는 효과 → 비용 → 실패 조건`으로 평가한다. 임의 점수보다 실제 조건을 쓴다. 예: process-local cache는 구현이 작지만 다른 process의 write를 즉시 보지 못한다. invalidation을 구현하지 않았는데 있다고 가정하지 않는다.
 
+대안이 컴포넌트·인터페이스·소유권을 바꾸면 [architecture](architecture.ko.md)를 읽고 실행 설명에 앞서 구조 변경을 보여준다. 제안한 요소는 명시적으로 구분한다. 상호작용 sequence는 설계를 보완할 수 있지만 설계의 근거가 되는 컴포넌트 관계를 대체하지 못한다.
+
 ## 추천을 구현 가능한 수준으로
 
 ```text

@@ -1,0 +1,300 @@
+{
+  "structure": {
+    "browser": "156.0.8078.4",
+    "display": {
+      "width": 1280,
+      "height": 840,
+      "viewBox": "0 0 1280 840",
+      "minWidth": "1280px"
+    },
+    "png_pixels": [
+      2560,
+      1680
+    ],
+    "export_scale": 2,
+    "title": {
+      "fontSize": "30px",
+      "fontWeight": "700"
+    },
+    "actual_fonts": [
+      {
+        "selector": "svg text.title",
+        "actual_fonts": [
+          {
+            "familyName": "Noto Sans KR Thin",
+            "postScriptName": "NotoSansKR-Thin",
+            "isCustomFont": true,
+            "glyphCount": 26
+          }
+        ]
+      },
+      {
+        "selector": "svg text.mono",
+        "actual_fonts": [
+          {
+            "familyName": "DejaVu Sans Mono",
+            "postScriptName": "DejaVuSansMono",
+            "isCustomFont": true,
+            "glyphCount": 8
+          }
+        ]
+      }
+    ],
+    "display_strokes_css_px": [
+      {
+        "tag": "rect",
+        "width": 2
+      },
+      {
+        "tag": "rect",
+        "width": 2
+      },
+      {
+        "tag": "rect",
+        "width": 2
+      },
+      {
+        "tag": "path",
+        "width": 2.5
+      },
+      {
+        "tag": "rect",
+        "width": 2
+      },
+      {
+        "tag": "line",
+        "width": 1
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "line",
+        "width": 2
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "line",
+        "width": 2
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "line",
+        "width": 2
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "line",
+        "width": 2
+      },
+      {
+        "tag": "rect",
+        "width": 3
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "rect",
+        "width": 2
+      },
+      {
+        "tag": "line",
+        "width": 1
+      },
+      {
+        "tag": "line",
+        "width": 1
+      }
+    ],
+    "text_outside_viewbox": [],
+    "narrow_390px": {
+      "pageWidth": 390,
+      "scrollWidth": 390,
+      "wrapperWidth": 342,
+      "wrapperScrollWidth": 1280
+    }
+  },
+  "keys": {
+    "browser": "156.0.8078.4",
+    "display": {
+      "width": 1280,
+      "height": 788,
+      "viewBox": "0 0 1280 788",
+      "minWidth": "1280px"
+    },
+    "png_pixels": [
+      2560,
+      1576
+    ],
+    "export_scale": 2,
+    "title": {
+      "fontSize": "30px",
+      "fontWeight": "700"
+    },
+    "actual_fonts": [
+      {
+        "selector": "svg text.title",
+        "actual_fonts": [
+          {
+            "familyName": "Noto Sans KR Thin",
+            "postScriptName": "NotoSansKR-Thin",
+            "isCustomFont": true,
+            "glyphCount": 36
+          }
+        ]
+      },
+      {
+        "selector": "svg text.mono",
+        "actual_fonts": [
+          {
+            "familyName": "DejaVu Sans Mono",
+            "postScriptName": "DejaVuSansMono",
+            "isCustomFont": true,
+            "glyphCount": 65
+          }
+        ]
+      }
+    ],
+    "display_strokes_css_px": [
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "rect",
+        "width": 2
+      },
+      {
+        "tag": "rect",
+        "width": 2
+      },
+      {
+        "tag": "path",
+        "width": 2.5
+      },
+      {
+        "tag": "path",
+        "width": 2.5
+      },
+      {
+        "tag": "path",
+        "width": 2.5
+      },
+      {
+        "tag": "path",
+        "width": 3
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "rect",
+        "width": 1.5
+      },
+      {
+        "tag": "line",
+        "width": 1
+      }
+    ],
+    "text_outside_viewbox": [],
+    "narrow_390px": {
+      "pageWidth": 390,
+      "scrollWidth": 390,
+      "wrapperWidth": 342,
+      "wrapperScrollWidth": 1280
+    }
+  },
+  "document_embed": [
+    {
+      "src": "assets/bbd2343276132657.svg",
+      "width": 1280,
+      "height": 840,
+      "loaded": true
+    },
+    {
+      "src": "assets/010f9ee117aa8541.svg",
+      "width": 1280,
+      "height": 788,
+      "loaded": true
+    }
+  ],
+  "standalone_svg": [
+    {
+      "slug": "structure",
+      "remote_requests_blocked": true,
+      "fonts": [
+        {
+          "familyName": "Noto Sans KR Thin",
+          "postScriptName": "NotoSansKR-Thin",
+          "isCustomFont": true,
+          "glyphCount": 26
+        }
+      ]
+    },
+    {
+      "slug": "keys",
+      "remote_requests_blocked": true,
+      "fonts": [
+        {
+          "familyName": "Noto Sans KR Thin",
+          "postScriptName": "NotoSansKR-Thin",
+          "isCustomFont": true,
+          "glyphCount": 36
+        }
+      ]
+    }
+  ]
+}
