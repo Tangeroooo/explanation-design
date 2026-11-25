@@ -26,4 +26,6 @@
 - Visual acceptance criteria:
 - Authoritative figure source / generated assets to refresh when claims change / published view to verify, if applicable:
 - diagram-design location and version discovered for production:
+- Independent review, if triggered: phase-one reader packet (render/version, display size, reader question, audience, reader-visible context) / phase-two evidence packet (relevant brief extracts, theme/overrides, versioned sources, tool observations; no author self-assessment or benchmark answers):
+- Review record: initial interpretation / findings and dispositions / regenerated versions / correction-recheck count (maximum two) / unresolved blockers or unavailable review:
 - Result / verification commands / actual observations / corrections / unverified areas:

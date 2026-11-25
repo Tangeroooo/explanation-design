@@ -87,6 +87,8 @@ The [evaluation report](evals/report.md) separates structural, evidence/semantic
 
 The [representation review](evals/representation-review.md) applies the figure-selection rules to synthetic range, resource-limit, failure, and ownership cases. It records brief-level semantic checks and artifact-freshness reasoning; it is not an independent evaluation or a rendered-figure quality claim.
 
+Complex diagrams and figure series use a separate reviewer when delegation is permitted and delegation/image viewing are available: first interpret the actual rendered image, then compare with versioned evidence. The producer adjudicates findings and performs at most two correction/recheck rounds. Simple figures retain author checks; unavailable independent review and unresolved blockers are reported explicitly. See the [review protocol](skills/explanation-design/references/verification.md#independent-diagram-review) and the [actual two-phase trial](evals/diagram-review.md), including a reviewer finding rejected during adjudication.
+
 ## Document assembly and verification
 
 The core tools use only the **Python 3.10+ standard library**. The assembler packages authored plain-text blocks and assets; it does not assess evidence or explanation quality.
