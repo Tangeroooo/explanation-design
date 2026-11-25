@@ -23,7 +23,7 @@ For a figure series, produce and inspect a representative structural view and, i
 
 Trace a concrete example through each consequential diagram. Check implied claims as well as labels: an arrow can invent order, two aligned paths can imply exclusive routing, containment can invent ownership, and bars can falsely imply disjoint budgets. Follow runtime arguments and instance identities when verifying ownership; shared helper calls or symbol counts do not prove that two processes write the same object. Check the scope of words such as “always,” “only,” and “all.” A coherent explanation of why a design exists is still an inference unless evidence supports it.
 
-Inspect actual output at its intended display size: reading order, endpoints, crossings, clipped labels, font glyphs, contrast, and comparable text scale across different renderers. Geometry checks can catch defects but do not prove that the picture communicates its intended meaning. Do not weaken a check just to make a broken figure pass; examine false positives and the rendered artifact separately.
+Inspect actual output at its intended display size: reading order, endpoints, crossings, clipped labels, actual rendering and glyphs of the selected font (Noto Sans KR unless explicitly overridden), the selected role palette, contrast, and comparable text scale across different renderers. Geometry checks can catch defects but do not prove that the picture communicates its intended meaning. Do not weaken a check just to make a broken figure pass; examine false positives and the rendered artifact separately.
 
 ## Keep corrections connected to delivered artifacts
 

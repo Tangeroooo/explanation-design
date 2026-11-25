@@ -41,8 +41,8 @@ A sequence view can suit a single interaction while a state view or branch compa
 
 Record a small visual vocabulary in the brief, then let diagram-design implement it.
 
-- Assign hues to the few roles or categories the reader must track across related views, not to every box. Use neutral scaffolding, restrained pale fills, and stronger outlines or accents for the focal relationship. Follow the agreed palette; no particular hex codes are universal.
-- Keep identity color distinct from status. If an entity's color already resembles an error color, show failure with a label, symbol, or pattern as well. A local palette change needs an explicit legend; a color is not a globally unique identifier.
+- Assign hues to the few roles or categories the reader must track across related views, not to every box. Use neutral scaffolding, restrained pale fills, and stronger outlines or accents for the focal relationship. Use the fixed [diagram theme](diagram-theme.md); its role mapping is explicit in the brief and does not require a theme-selection question.
+- Keep identity color distinct from status. If an entity's color already resembles an error color, show failure with a label, symbol, or pattern as well. A local role-to-color reassignment needs an explicit legend; a color is not a globally unique identifier.
 - Use shapes that expose structure: an actor with mailbox slots, a file with content marks, a log with ordered cells, a pool with repeated workers, or a boundary containing owned resources. Use a plain box when it conveys the required meaning. Icons must not imply a queue, disk, thread, or replica that the evidence does not support.
 - Give position, enclosure, line style, arrowheads, and size explicit meanings. Arbitrary placement must not suggest execution order, exclusive routing, ownership, or numeric scale. Use labels and shapes so meaning survives loss of color.
 - Across a figure series, keep names, role colors, recurring symbols, and displayed text scale consistent. Equal PNG widths alone do not make text equally readable. Pass the intended display size to the producer and inspect it there.
