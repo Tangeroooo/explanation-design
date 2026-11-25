@@ -5,7 +5,7 @@
 - One-sentence main message:
 - Audience / prerequisite concepts:
 - Source IDs, locations, and versions / claim IDs:
-- Visual type / why it helps more than prose or a table:
+- Visual type / structural, ordering, or state question / why it helps more than prose or a table / why a sequence alone is sufficient, if chosen:
 - Parent view / correspondence from its elements and edges to this view / aggregation, added detail, or perspective change:
 - Included elements / meaning of each element:
 - Visual vocabulary: color roles, shapes, enclosure, positions/axes, line styles, size / non-color cues:
@@ -18,7 +18,8 @@
 - Omissions and aggregation / effects on interpretation:
 - Concrete example to trace / illustrative values / boundaries and distinctions that must survive abstraction:
 - Comparison, if any: shared baseline / what changes / unchanged context to mute:
-- Size / detail level:
+- Layout/viewBox size / intended display size / PNG pixel dimensions and export scale / embed display_width / detail level:
+- Title size/weight and effective connector/boundary stroke widths at that display size:
 - Selected style: [fixed role palette](../references/diagram-theme.md), Noto Sans KR for explanatory text; record a monospace family for code/literal identifiers; no theme/profile questions or pre-drawing approval pause. Record any explicit user override:
 - Font loading / actual rendered font and glyph verification / portable export treatment:
 - Required output formats:

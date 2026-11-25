@@ -62,13 +62,15 @@ and reproducible plotting code.
 
 Respond in the user's language. There is no fixed number of sections, figures, or output files. Adapt the English or Korean templates to the reader's language.
 
+Architecture and design explanations start with component structure, interfaces, ownership, and shared resources; sequence views are reserved for interaction order. Figures use bold titles and stronger lines measured at their intended display size, with vector output and 2× PNG export. See [representation selection](skills/explanation-design/references/visual-selection.md) and [display/export defaults](skills/explanation-design/references/diagram-theme.md#visible-weight-and-resolution).
+
 ## Responsibilities with diagram-design
 
 explanation-design owns evidence investigation, claims, explanation order, representation choice, figure briefs, semantic verification, and document assembly. New diagrams use the fixed [light role palette with Noto Sans KR for explanation and monospace for code](skills/explanation-design/references/diagram-theme.md), with no theme/profile questions or pre-drawing approval pause. For diagram layout, applying these style tokens, visual verification, and SVG/PNG export, read and apply the **separately installed diagram-design** skill. Do not hardcode its path or version or duplicate its renderer.
 
 If diagram-design is unavailable, complete the explanation, tables, and brief and mark requested figures unproduced. Short explanations without diagrams do not require it. Exact quantitative charts use original data and standard plotting tools such as Matplotlib, not image-generation models.
 
-The linked rendering examples predate the fixed theme and remain historical integration evidence; they do not demonstrate the new palette or prose/code typography rules.
+The linked delivery-flow example predates the fixed theme and remain historical integration evidence; they do not demonstrate the new palette or prose/code typography rules.
 
 Actual integration example: [production brief](examples/code/figures/brief.md) → [diagram HTML](examples/code/figures/delivery-flow.html) → [SVG](examples/code/figures/delivery-flow.svg) / [PNG](examples/code/figures/delivery-flow.png) → [assembled explanation HTML](examples/code/output/index.html).
 
@@ -78,6 +80,7 @@ These are synthetic fixtures for explanation and evaluation, not verification of
 
 | Case | Question and main judgment | Artifacts |
 |---|---|---|
+| Architecture | Process ownership, shared pool, and helper argument-to-record mapping | [HTML](examples/architecture/document/index.html), [component SVG](examples/architecture/structure.svg), [2× PNG](examples/architecture/structure.png), [review](evals/component-views.md) |
 | Code | State after send/ack failures; external effects versus call success | [Markdown](examples/code/output/explanation.md), [HTML](examples/code/output/index.html), [input](examples/code/input/worker.py) |
 | Design | Local queue, DB job table, or broker under recovery-after-acceptance constraints | [Markdown](examples/design/output/explanation.md), [HTML](examples/design/output/index.html), [requirements](examples/design/input/requirements.md) |
 | Data | Falling within-group error rates but rising overall rate as workload mix changes | [Markdown](examples/data/output/document/explanation.md), [HTML](examples/data/output/document/index.html), [source](examples/data/input/cohorts.csv), [plotting code](examples/data/analyze.py) |

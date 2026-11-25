@@ -11,6 +11,8 @@ State a brief recommendation first, then show the conditions under which it hold
 
 Evaluate each option through `module/API changes → state and data/control flow → benefits → costs → failure conditions`. Use concrete conditions rather than arbitrary scores. A process-local cache may be small to implement but does not immediately observe writes in other processes. Do not assume invalidation exists unless implemented.
 
+When an option changes components, interfaces, or ownership, read [architecture](architecture.md) and show those changes structurally before explaining execution. Mark proposed elements explicitly. An interaction sequence can supplement the design but cannot replace the component relationships that justify it.
+
 ## Make the recommendation actionable
 
 ```text

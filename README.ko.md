@@ -62,13 +62,15 @@ $explanation-design 이 데이터의 전체·집단별 차이를 계산해줘.
 
 기본 응답은 사용자 언어입니다. 고정된 섹션 수·그림 수·파일 묶음을 강제하지 않습니다.
 
+아키텍처·설계 설명은 컴포넌트 구조·인터페이스·소유권·공유 자원을 먼저 보여주며 sequence는 상호작용 순서에 사용합니다. 제목과 선은 실제 표시 크기에서 굵기를 확보하고, 벡터와 2배 PNG를 출력합니다. [표현 선택](skills/explanation-design/references/visual-selection.ko.md)과 [표시·export 기본값](skills/explanation-design/references/diagram-theme.ko.md#실제-표시-굵기와-해상도)을 참고하세요.
+
 ## diagram-design과의 역할
 
 explanation-design은 근거 조사·주장·설명 순서·표현 선택·그림 명세·의미 검증·문서 조립을 담당합니다. 새 다이어그램은 고정 [밝은 역할별 팔레트·설명용 Noto Sans KR·코드용 고정폭 글꼴](skills/explanation-design/references/diagram-theme.ko.md)을 사용하며 테마·프로필 질문이나 제작 전 승인 대기를 하지 않습니다. 실제 다이어그램의 레이아웃·지정 스타일 토큰 적용·시각 검증·SVG/PNG export는 **별도 설치된 diagram-design** 지침을 읽고 수행합니다. 경로·버전을 하드코딩하거나 renderer를 복제하지 않습니다.
 
 diagram-design이 없으면 설명·표·제작 명세까지 완료하고 미제작 범위를 표시합니다. 그림이 없는 짧은 설명에는 필요하지 않습니다. 정확한 수치 차트는 Matplotlib 등 표준 plotting 도구와 원본 데이터로 만들며 이미지 생성 모델을 사용하지 않습니다.
 
-아래 렌더 예제는 고정 테마 도입 전의 연계 검증 기록입니다. 새 팔레트나 설명용·코드용 폰트 구분를 검증한 예제는 아닙니다.
+아래 delivery-flow 예제는 고정 테마 도입 전의 연계 검증 기록입니다. 새 팔레트나 설명용·코드용 폰트 구분를 검증한 예제는 아닙니다.
 
 실제 연계 예제: [제작 명세](examples/code/figures/brief.md) → [diagram HTML](examples/code/figures/delivery-flow.html) → [SVG](examples/code/figures/delivery-flow.svg) / [PNG](examples/code/figures/delivery-flow.png) → [조립한 설명 HTML](examples/code/output/index.html).
 
@@ -78,6 +80,7 @@ diagram-design이 없으면 설명·표·제작 명세까지 완료하고 미제
 
 | 사례 | 질문·핵심 판단 | 산출물 |
 |---|---|---|
+| 아키텍처 | 프로세스별 소유권·공유 pool·helper 인자와 기록 대상의 대응 | [HTML](examples/architecture/document/index.html), [컴포넌트 SVG](examples/architecture/structure.svg), [2배 PNG](examples/architecture/structure.png), [평가](evals/component-views.md) |
 | 코드 | send 실패와 ack 실패 뒤 상태, 외부 효과와 호출 성공의 차이 | [Markdown](examples/code/output/explanation.md), [HTML](examples/code/output/index.html), [입력](examples/code/input/worker.py) |
 | 설계 | accepted 이후 복구 조건에서 local queue·DB job table·broker 비교 | [Markdown](examples/design/output/explanation.md), [HTML](examples/design/output/index.html), [요구사항](examples/design/input/requirements.md) |
 | 데이터 | 집단별 오류율 감소와 전체 오류율 증가, workload 비중의 영향 | [Markdown](examples/data/output/document/explanation.md), [HTML](examples/data/output/document/index.html), [원본](examples/data/input/cohorts.csv), [plotting 코드](examples/data/analyze.py) |
