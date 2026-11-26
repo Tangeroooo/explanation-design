@@ -1,5 +1,7 @@
 # Figure production brief
 
+For structural/design views, attach the [component specification](component-brief.md) and reference its IDs in the element/relationship fields below. Skip that appendix for sequence-only, state-only, or numerical figures; adapt fields to the question.
+
 - ID / title:
 - Reader question / concrete tracing, comparison, prediction, or decision the figure should enable:
 - One-sentence main message:

@@ -19,6 +19,8 @@ Do not claim more than a check actually establishes.
 
 ## Review meaning before scaling production
 
+For component views, first run the [component specification's pre-render check](../assets/component-brief.md). After rendering, compare the declared ownership, instance counts, internal compartments, shared users, and typed endpoints with what the image communicates. Detail should be evidenced and useful, not measured by node count. When evaluating brief handoff, give a fresh producer the brief and necessary evidence without the previous render, author discussion, or scoring key; record what the producer still had to infer. Separate this from the independent image review below.
+
 For a figure series, produce and inspect a representative structural view and, if needed, a flow or failure view before applying the vocabulary to the full set. Use existing user preferences; this is a verification step, not a new approval requirement. Finish by checking the whole delivered set for consistent names, symbols, scale, and the defect classes found in the representative views.
 
 Trace a concrete example through each consequential diagram. Check implied claims as well as labels: an arrow can invent order, two aligned paths can imply exclusive routing, containment can invent ownership, and bars can falsely imply disjoint budgets. Follow runtime arguments and instance identities when verifying ownership; shared helper calls or symbol counts do not prove that two processes write the same object. Check the scope of words such as “always,” “only,” and “all.” A coherent explanation of why a design exists is still an inference unless evidence supports it.
