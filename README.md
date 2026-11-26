@@ -64,6 +64,8 @@ Respond in the user's language. There is no fixed number of sections, figures, o
 
 Architecture and design explanations start with component structure, interfaces, ownership, and shared resources; sequence views are reserved for interaction order. Figures use bold titles and stronger lines measured at their intended display size, with vector output and 2× PNG export. See [representation selection](skills/explanation-design/references/visual-selection.md) and [display/export defaults](skills/explanation-design/references/diagram-theme.md#visible-weight-and-resolution).
 
+Structural/design figures also use a [component specification](skills/explanation-design/assets/component-brief.md): per-component ownership/counts, internal detail, evidenced interfaces, typed relationships, and a pre-render completeness check. Sequence-only, state-only, and numerical figures skip this appendix. Unknown contracts remain unknown rather than becoming invented detail. See the [completed brief and independent handoff trial](evals/component-handoff/report.md).
+
 ## Responsibilities with diagram-design
 
 explanation-design owns evidence investigation, claims, explanation order, representation choice, figure briefs, semantic verification, and document assembly. New diagrams use the fixed [light role palette with Noto Sans KR for explanation and monospace for code](skills/explanation-design/references/diagram-theme.md), with no theme/profile questions or pre-drawing approval pause. For diagram layout, applying these style tokens, visual verification, and SVG/PNG export, read and apply the **separately installed diagram-design** skill. Do not hardcode its path or version or duplicate its renderer.

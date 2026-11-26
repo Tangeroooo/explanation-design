@@ -64,6 +64,8 @@ $explanation-design 이 데이터의 전체·집단별 차이를 계산해줘.
 
 아키텍처·설계 설명은 컴포넌트 구조·인터페이스·소유권·공유 자원을 먼저 보여주며 sequence는 상호작용 순서에 사용합니다. 제목과 선은 실제 표시 크기에서 굵기를 확보하고, 벡터와 2배 PNG를 출력합니다. [표현 선택](skills/explanation-design/references/visual-selection.ko.md)과 [표시·export 기본값](skills/explanation-design/references/diagram-theme.ko.md#실제-표시-굵기와-해상도)을 참고하세요.
 
+구조·설계 그림에는 [컴포넌트 명세](skills/explanation-design/assets/component-brief.ko.md)를 추가합니다. 컴포넌트별 소유권·수량·내부 상세·근거 있는 접점·관계 종류를 기록하고 제작 전에 전달할 정보가 충분한지 점검합니다. 순서·상태·수치만 다루는 그림에는 부록을 생략하며, 미상 계약을 상세 묘사로 지어내지 않습니다. [작성 예제와 독립 전달 시험](evals/component-handoff/report.md)도 보존했습니다.
+
 ## diagram-design과의 역할
 
 explanation-design은 근거 조사·주장·설명 순서·표현 선택·그림 명세·의미 검증·문서 조립을 담당합니다. 새 다이어그램은 고정 [밝은 역할별 팔레트·설명용 Noto Sans KR·코드용 고정폭 글꼴](skills/explanation-design/references/diagram-theme.ko.md)을 사용하며 테마·프로필 질문이나 제작 전 승인 대기를 하지 않습니다. 실제 다이어그램의 레이아웃·지정 스타일 토큰 적용·시각 검증·SVG/PNG export는 **별도 설치된 diagram-design** 지침을 읽고 수행합니다. 경로·버전을 하드코딩하거나 renderer를 복제하지 않습니다.

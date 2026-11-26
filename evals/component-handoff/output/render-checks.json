@@ -1,0 +1,81 @@
+{
+  "html": {
+    "fonts": [
+      [
+        "DejaVu Sans Mono",
+        true
+      ],
+      [
+        "Noto Sans KR Thin",
+        true
+      ]
+    ],
+    "glyphs": 976,
+    "checks": {
+      "width": 1280,
+      "height": 1088,
+      "titleSize": "30px",
+      "titleWeight": "700",
+      "outside": [],
+      "overlaps": [],
+      "loadedFonts": [
+        {
+          "family": "Noto Sans KR",
+          "status": "loaded"
+        },
+        {
+          "family": "DejaVu Sans Mono",
+          "status": "loaded"
+        }
+      ]
+    }
+  },
+  "svg": {
+    "fonts": [
+      [
+        "DejaVu Sans Mono",
+        true
+      ],
+      [
+        "Noto Sans KR Thin",
+        true
+      ]
+    ],
+    "glyphs": 976,
+    "checks": {
+      "width": 1280,
+      "height": 1088,
+      "titleSize": "30px",
+      "titleWeight": "700",
+      "outside": [],
+      "overlaps": [],
+      "loadedFonts": [
+        {
+          "family": "Noto Sans KR",
+          "status": "loaded"
+        },
+        {
+          "family": "DejaVu Sans Mono",
+          "status": "loaded"
+        }
+      ]
+    }
+  },
+  "mobile": {
+    "viewport": 390,
+    "document": 390,
+    "wrapper": 390,
+    "scrollWidth": 1280,
+    "svg": 1280
+  },
+  "png": {
+    "component-handoff.png": [
+      2560,
+      2176
+    ],
+    "preview/component-handoff-1x.png": [
+      1280,
+      1088
+    ]
+  }
+}

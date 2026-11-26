@@ -1,0 +1,20 @@
+{
+  "scope": "Single synthetic brief-only handoff; source authoring and human comprehension not tested",
+  "sha256": {
+    "brief.md": "8baa3986cdbd0219b1b2553101f8d849de17e3aa42ed01bc3344424a1f1af56c",
+    "input.md": "d64fe2d9f14f84600f8070a9190cfa28b737c2b95419c42e811ae916250387e6",
+    "output/component-handoff.html": "9245931fa901bdb9648f4a585efce73fef5e552a63506f9c569314b934c6c4a6",
+    "output/component-handoff.png": "b7c168852525119ece34d6d87975212d907725e8231303beb1ee7bbe519e02cc",
+    "output/component-handoff.svg": "f8948c0ff0c2052d8649b4e02690a1740cde84a10098c4eb66fb9f14327b90a0",
+    "output/font-licenses/DejaVu-copyright.txt": "e81d9dced49fea2a7d576cbea283873de58563c5d488f954deb282843c3ea79c",
+    "output/font-licenses/Noto-Sans-KR-OFL.txt": "babcfe66c8a098b2fa279bc724a3a342f8124f77ce18941fbcc1bbb39823cded",
+    "output/handoff-notes.md": "1f92f33a7635576d8c002b5f08514ea11494a1e2323cf7402a9ea7066f491776",
+    "output/preview/component-handoff-1x.png": "74ef406b1734b302b94bfebe6c2cf38334446aedcf83c24518d36f6a3ece2ee4",
+    "output/preview/component-handoff-initial.png": "2fe119f5d1f24cc2d706ec2daae3ec3afe386890ac096b8d360cbce2980c1ebc",
+    "output/render-checks.json": "f89c886d8d45dfc0323a81bba5ef3a04c68e1bde9ef9462a888364f0df45f6ee",
+    "output/verify-render.py": "cca3641c03850748be76d3b41a74818bb121e2a0115d8005693181b292bb6a87",
+    "report.md": "d2f71c88c1fc4c17c7520e9439c007abbdd423ea02583d98bfbfa207c8c88876",
+    "review-phase1.md": "2eba0aa2e4f46cbe2fa112158fb7b4c355d15c12ce4d4e78fe6700717fa7fb85",
+    "review.md": "c57fb3286754f60fe98aea5bee4796114e15da0bafa31b818d09313942b50bf5"
+  }
+}
